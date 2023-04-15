@@ -1,5 +1,5 @@
-import puppeteer from 'puppeteer';
-import dotenv from 'dotenv';
+import puppeteer from "puppeteer";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -8,8 +8,8 @@ dotenv.config();
     throw new Error("必要な環境変数がありません。");
   }
 
-  const url =process.env.URL; 
-  const selector =process.env.SELECTOR; 
+  const url = process.env.URL;
+  const selector = process.env.SELECTOR;
 
   // Puppeteer の起動
   const browser = await puppeteer.launch();
@@ -20,7 +20,7 @@ dotenv.config();
 
   // DOM からテキストを取得
   const element = await page.$(selector);
-  const text = await page.evaluate(element => element!.textContent, element);
+  const text = await page.evaluate((element) => element!.textContent, element);
   console.log(text); // テキストの表示
 
   // Puppeteer の終了

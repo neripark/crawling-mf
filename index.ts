@@ -8,9 +8,6 @@ dotenv.config();
     throw new Error("必要な環境変数がありません。");
   }
 
-  console.log(process.env.URL);
-  console.log(process.env.SELECTOR);
-
   const url =process.env.URL; 
   const selector =process.env.SELECTOR; 
 

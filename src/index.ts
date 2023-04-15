@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import dotenv from "dotenv";
-import { notifyToLine } from "./src/postToLineNotify";
+import { notifyToLine } from "./postToLineNotify";
 
 dotenv.config();
 

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/neripark/crawling-mf#readme",
   "dependencies": {
+    "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "puppeteer": "^19.9.0",
     "ts-node": "^10.9.1",

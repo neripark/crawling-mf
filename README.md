@@ -4,3 +4,10 @@
   - この運用自体微妙なのでなんとかしたいが...
 - 計算したら LINE に通知
 - 完全に自分用
+
+# Setup
+
+```
+$ cp .env.example .env # and edit
+$ npm ci
+```

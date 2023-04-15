@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/neripark/crawling-mf/issues"
   },
-  "homepage": "https://github.com/neripark/crawling-mf#readme"
+  "homepage": "https://github.com/neripark/crawling-mf#readme",
+  "dependencies": {
+    "puppeteer": "^19.9.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
 }

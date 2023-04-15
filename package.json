@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write **/*.ts *.md --ignore-path .gitignore",
-    "format-check": "prettier --check **/*.ts *.md --ignore-path .gitignore"
+    "format-check": "prettier --check **/*.ts *.md --ignore-path .gitignore",
+    "main": "ts-node index.ts"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
     "typescript": "^5.0.4"
   },
   "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/node-fetch": "^2.6.3",
     "prettier": "^2.8.7"
   }
 }

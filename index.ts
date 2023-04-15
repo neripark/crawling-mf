@@ -1,5 +1,6 @@
 import puppeteer from "puppeteer";
 import dotenv from "dotenv";
+import { notifyToLine } from "./src/postToLineNotify";
 
 dotenv.config();
 
@@ -21,7 +22,9 @@ dotenv.config();
   // DOM からテキストを取得
   const element = await page.$(selector);
   const text = await page.evaluate((element) => element!.textContent, element);
-  console.log(text); // テキストの表示
+
+  console.log(text);
+  await notifyToLine(text || "テキストが見つかりませんでした。");
 
   // Puppeteer の終了
   await browser.close();

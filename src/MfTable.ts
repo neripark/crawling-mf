@@ -58,7 +58,11 @@ export class MfTable {
         number: stringToNumber(element.number.textContent ?? ""),
       };
     });
-
     return _rows;
+  }
+
+  public getRowsSimpleString(): string {
+    const rowString = this.rows.map((row) => Object.values(row).join(" "));
+    return rowString.join("\n");
   }
 }

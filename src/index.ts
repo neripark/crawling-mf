@@ -1,6 +1,8 @@
 import puppeteer from "puppeteer";
 import dotenv from "dotenv";
 import { notifyToLine } from "./postToLineNotify";
+import { generateDateLabelOnMf } from "./generateDateLabel";
+import { MfTable } from "./MfTable";
 
 dotenv.config();
 
@@ -43,40 +45,68 @@ dotenv.config();
 
   // 11. 特定の要素のテキストが `前月1日〜前月末日`となっていることを確認する
   await page.waitForSelector(".fc-header-title.in-out-header-title h2");
+
+  // note: ブラウザ側に渡される関数だが、使用する変数は連れて行ってはくれないので、第3引数に記述して渡す必要がある
+  const pastMonthLabel = await page.evaluate(
+    (label) => label,
+    generateDateLabelOnMf()
+  );
   await page.waitForFunction(
-    () => {
+    (expectedLabel) => {
       const element = document.querySelector(
         ".fc-header-title.in-out-header-title h2"
       );
       if (element) {
         const text = element.textContent!.trim();
-        return text === "2023/03/01 - 2023/03/31";
+        return text === expectedLabel;
       }
       return false;
     },
-    { timeout: 5000 }
+    { timeout: 50000 },
+    pastMonthLabel
   );
 
   // 12. 特定のtable要素が表示されるのを待つ
   await page.waitForSelector("table#cf-detail-table");
+  console.log("hoge3");
 
-  // いったん固定で取得
-  const date = await page.$eval(
-    "#js-transaction-15326002005 > td.date.form-switch-td > div.noform > span",
-    (element) => element.textContent
-  );
-  const title = await page.$eval(
-    "table#cf-detail-table td.content.form-switch-td > div.noform > span",
-    (element) => element.textContent
+  // 行を配列で取得
+  // todo: Element 型とはなにか？をキャッチアップする
+
+  const rowElements = await page.$$eval(
+    ".transaction_list.js-cf-edit-container",
+    (rows) => {
+      const rowsData = rows.map((row) => {
+        const date = row.querySelector(".date.form-switch-td");
+        const content = row.querySelector(".content.form-switch-td");
+        const number = row.querySelector(".number.form-switch-td");
+        return {
+          date,
+          content,
+          number,
+        };
+      });
+      return rowsData;
+    }
   );
 
-  console.log(date, title);
+  const mfTable = new MfTable(rowElements);
+  const msg = mfTable.getRowsSimpleString();
 
-  await notifyToLine(
-    title
-      ? `3月の一番最初のレコードは、${date} の 「${title}」 にゃー`
-      : "テキストが見つかりませんでした。"
-  );
+  console.log(msg);
+
+  // const title = await page.$eval(
+  //   "table#cf-detail-table td.content.form-switch-td > div.noform > span",
+  //   (element) => element.textContent
+  // );
+
+  // console.log(date, title);
+
+  // await notifyToLine(
+  //   title
+  //     ? `3月の一番最初のレコードは、${date} の 「${title}」 にゃー`
+  //     : "テキストが見つかりませんでした。"
+  // );
 
   // Puppeteer の終了
   await browser.close();

@@ -6,10 +6,9 @@ dotenv.config();
 
 (async () => {
   if (
-    process.env.URL === undefined ||
-    process.env.SELECTOR === undefined ||
     process.env.LOGIN_EMAIL === undefined ||
-    process.env.LOGIN_PASSWORD === undefined
+    process.env.LOGIN_PASSWORD === undefined ||
+    process.env.LINE_NOTIFY_TOKEN === undefined
   ) {
     throw new Error("必要な環境変数がありません。");
   }

@@ -68,48 +68,26 @@ dotenv.config();
 
   // 12. 特定のtable要素が表示されるのを待つ
   await page.waitForSelector("table#cf-detail-table");
-  console.log("hoge3");
 
-  // 行を配列で取得
-  // todo: Element 型とはなにか？をキャッチアップする
-
-  const rowElements = await page.$$eval(
-    ".transaction_list.js-cf-edit-container",
-    (rows) => {
-      const rowsData = rows.map((row) => {
-        const date = row.querySelector(".date.form-switch-td");
-        const content = row.querySelector(".content.form-switch-td");
-        const number = row.querySelector(".number.form-switch-td");
-        return {
-          date,
-          content,
-          number,
-        };
-      });
-      return rowsData;
-    }
-  );
-
-  const mfTable = new MfTable(rowElements);
-  const msg = mfTable.getRowsSimpleString();
-
-  console.log(msg);
-
-  // const title = await page.$eval(
-  //   "table#cf-detail-table td.content.form-switch-td > div.noform > span",
-  //   (element) => element.textContent
-  // );
-
-  // console.log(date, title);
-
-  // await notifyToLine(
-  //   title
-  //     ? `3月の一番最初のレコードは、${date} の 「${title}」 にゃー`
-  //     : "テキストが見つかりませんでした。"
-  // );
+  const serializedTable = await page.evaluate(() => {
+    // todo: MfTableクラス側に寄せる
+    const table = document.querySelector("table#cf-detail-table");
+    if (table === null) throw new Error("対象テーブルが見つかりませんでした。");
+    // note: DOMのままではNode.jsに渡せないためいったん文字列にする
+    return table.outerHTML;
+  });
 
   // Puppeteer の終了
   await browser.close();
 
+  const mfTable = new MfTable(serializedTable);
+  const msg = mfTable.getRowsSimpleString();
+
+  console.log(msg);
+
+  // todo: 長いと見切れるため、分割送信するかどうか決める
+  await notifyToLine(msg ?? "テキストが見つかりませんでした。");
+
+  console.log("----------------------------------");
   console.log("done.");
 })();

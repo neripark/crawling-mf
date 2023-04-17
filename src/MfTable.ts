@@ -1,13 +1,7 @@
 import { stringToNumber } from "./stringToNumber";
 import { JSDOM } from "jsdom";
 
-interface RowElement {
-  date: Element | null;
-  content: Element | null;
-  number: Element | null;
-}
-
-interface NonNullableRowElements extends RowElement {
+interface NonNullableRowElements {
   date: Element;
   content: Element;
   number: Element;

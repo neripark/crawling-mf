@@ -22,6 +22,10 @@ dotenv.config();
   // page.setDefaultTimeout(5000);
 
   // 1. 目的の画面に遷移
+  // note: ユーザーエージェント偽装しないとサーバーに弾かれる
+  await page.setUserAgent(
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+  );
   await page.goto("https://moneyforward.com/cf#daily_info");
   await page.click('a[href^="/sign_in/email"]');
 

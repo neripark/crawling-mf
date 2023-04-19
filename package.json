@@ -7,6 +7,7 @@
     "format": "prettier --write **/*.ts *.md --ignore-path .gitignore",
     "format-check": "prettier --check **/*.ts *.md --ignore-path .gitignore",
     "main": "ts-node src/index.ts",
+    "main:prd": "NODE_ENV=production ts-node src/index.ts",
     "test": "jest"
   },
   "repository": {

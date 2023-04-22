@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer, { type Page } from "puppeteer";
 import dotenv from "dotenv";
 import { notifyToLine } from "./postToLineNotify";
 import { getTimestamp } from "./getTimestamp";
@@ -6,6 +6,10 @@ import { generateDateLabelOnMf } from "./generateDateLabel";
 import { MfTable } from "./MfTable";
 
 dotenv.config();
+
+const ss = async (page: Page) => {
+  await page.screenshot({ path: `tmp/${getTimestamp()}.png` });
+};
 
 (async () => {
   if (
@@ -66,6 +70,7 @@ dotenv.config();
   );
   console.log("[start] visit site...");
   await page.goto("https://moneyforward.com/cf#daily_info");
+  await ss(page);
   await page.click('a[href^="/sign_in/email"]');
 
   // `navigator.cookieEnabled`をコンソールに出力する
@@ -78,11 +83,11 @@ dotenv.config();
   console.log("[start] input email...");
   // console.log("content:", await page.content());
   await page.waitForSelector("input[type='email']");
-  console.log("[start] hoge 1");
+  await ss(page);
   await page.type("input[type='email']", process.env.LOGIN_EMAIL);
-  console.log("[start] hoge 2");
+  await ss(page);
   await page.click("input.submitBtn.homeDomain[type=submit]");
-  console.log("[start] hoge 3");
+  await ss(page);
   // await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
@@ -93,13 +98,13 @@ dotenv.config();
   // 9. 画面遷移を待つ
   // console.log("[start] wait for navigation...");
   // await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
-
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");
-  await page.screenshot({ path: `tmp/${getTimestamp()}.png` });
+  await ss(page);
   await page.waitForSelector(
     "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
   );
+  await ss(page);
   await page.click(
     "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
   );

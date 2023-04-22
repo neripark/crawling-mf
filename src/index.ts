@@ -82,7 +82,6 @@ dotenv.config();
   console.log("[start] hoge 2");
   await page.click("input.submitBtn.homeDomain[type=submit]");
   console.log("[start] hoge 3");
-  await page.screenshot({ path: 'tmp/screenshot.png' });
   // await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
@@ -96,6 +95,7 @@ dotenv.config();
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");
+  await page.screenshot({ path: 'tmp/screenshot.png' });
   await page.click(
     "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
   );

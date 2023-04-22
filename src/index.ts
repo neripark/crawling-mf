@@ -68,6 +68,12 @@ dotenv.config();
   await page.goto("https://moneyforward.com/cf#daily_info");
   await page.click('a[href^="/sign_in/email"]');
 
+  // `navigator.cookieEnabled`をコンソールに出力する
+  const cookieEnabled = await page.evaluate(() => {
+    return navigator.cookieEnabled;
+  });
+  console.log(`navigator.cookieEnabled: ${cookieEnabled}`);
+
   // 2. email のインプットボックスにメールアドレスを入力して次へ
   console.log("[start] input email...");
   console.log("content:", await page.content());

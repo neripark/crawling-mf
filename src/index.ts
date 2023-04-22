@@ -41,7 +41,7 @@ dotenv.config();
   await page.type("input[type='email']", process.env.LOGIN_EMAIL);
   console.log("[start] hoge 2");
   await page.click("input.submitBtn.homeDomain[type=submit]");
-  console.log("[start] hoge 2");
+  console.log("[start] hoge 3");
   await page.waitForNavigation();
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ

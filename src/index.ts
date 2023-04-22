@@ -88,16 +88,19 @@ const ss = async (page: Page) => {
   await ss(page);
   await page.click("input.submitBtn.homeDomain[type=submit]");
   await ss(page);
-  // await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
+  await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
+  await ss(page);
   await page.type("input[type='password']", process.env.LOGIN_PASSWORD);
+  await ss(page);
   await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
 
+  await ss(page);
   // 9. 画面遷移を待つ
   // console.log("[start] wait for navigation...");
-  // await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
+  await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");
   await ss(page);

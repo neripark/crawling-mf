@@ -12,7 +12,6 @@ const ss = async (page: Page) => {
 };
 
 (async () => {
-  console.log(process.env);
   if (
     process.env.LOGIN_EMAIL === undefined ||
     process.env.LOGIN_EMAIL === "" ||

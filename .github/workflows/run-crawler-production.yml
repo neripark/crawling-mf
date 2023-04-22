@@ -9,10 +9,6 @@ on:
 jobs:
   crawl:
     runs-on: ubuntu-latest
-    env:
-      LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
-      LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-      LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js
@@ -23,3 +19,7 @@ jobs:
         run: npm ci
       - name: Run Crawler
         run: npm run main:prd
+        env:
+          LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
+          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+          LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}

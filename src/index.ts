@@ -35,7 +35,7 @@ dotenv.config();
 
   // 2. email のインプットボックスにメールアドレスを入力して次へ
   console.log("[start] input email...");
-  console.log("content:", page.content());
+  console.log("content:", await page.content());
   await page.waitForSelector("input[type='email']");
   await page.type("input[type='email']", process.env.LOGIN_EMAIL);
   await page.click("input.submitBtn.homeDomain[type=submit]");

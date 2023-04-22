@@ -21,7 +21,7 @@ dotenv.config();
   const page = await browser.newPage();
   page.setDefaultTimeout(
     // note: GitHub Actions 上でだけタイムアウトで落ちるため
-    process.env.NODE_ENV === "production" ? 60000 : page.getDefaultTimeout()
+    process.env.NODE_ENV === "production" ? 300000 : page.getDefaultTimeout()
   );
 
   // 1. 目的の画面に遷移
@@ -30,6 +30,7 @@ dotenv.config();
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
   );
   console.log("[start] visit site...");
+  console.log(page.content());
   await page.goto("https://moneyforward.com/cf#daily_info");
   await page.click('a[href^="/sign_in/email"]');
 

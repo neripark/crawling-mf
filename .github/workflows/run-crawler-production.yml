@@ -9,6 +9,10 @@ on:
 jobs:
   crawl:
     runs-on: ubuntu-latest
+    env:
+      LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
+      LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+      LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js
@@ -20,10 +24,6 @@ jobs:
       - name: Run Crawler
         run: npm run main:prd
         continue-on-error: true
-        env:
-          LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
-          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-          LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
       - name: Download screenshot
         uses: actions/upload-artifact@v3
         if: always()

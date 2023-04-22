@@ -19,9 +19,10 @@ dotenv.config();
     headless: process.env.NODE_ENV === "production",
   });
   const page = await browser.newPage();
+  const TIMEOUT = 30000;
   page.setDefaultTimeout(
     // note: GitHub Actions 上でだけタイムアウトで落ちるため
-    process.env.NODE_ENV === "production" ? 600000 : page.getDefaultTimeout()
+    process.env.NODE_ENV === "production" ? TIMEOUT : page.getDefaultTimeout()
   );
 
   // _____________________________________________________________________________________
@@ -31,8 +32,8 @@ dotenv.config();
     console.log(`Response headers: ${JSON.stringify(response.headers())}`);
     response.text().then((text) => {
       console.log(`Response body: ${text}`);
-      console.log(`****** response log end ******`);
     });
+    console.log(`****** response log end ******`);
   });
   // _____________________________________________________________________________________
 

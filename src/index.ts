@@ -158,10 +158,8 @@ const ss = async (page: Page) => {
   const mfTable = new MfTable(serializedTable);
   const msg = mfTable.getRowsSimpleString();
 
-  console.log(msg);
-
   // todo: 長いと見切れるため、分割送信するかどうか決める
-  // await notifyToLine(msg ?? "テキストが見つかりませんでした。");
+  await notifyToLine(msg ?? "テキストが見つかりませんでした。");
 
   console.log("----------------------------------");
   console.log("done.");

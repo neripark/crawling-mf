@@ -23,3 +23,8 @@ jobs:
         run: npm ci
       - name: Run Crawler
         run: npm run main:prd
+      - name: Download screenshot
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshot
+          path: tmp/example.png

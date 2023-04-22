@@ -91,8 +91,8 @@ dotenv.config();
   await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
 
   // 9. 画面遷移を待つ
-  console.log("[start] wait for navigation...");
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // console.log("[start] wait for navigation...");
+  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");

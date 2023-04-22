@@ -82,7 +82,8 @@ dotenv.config();
   console.log("[start] hoge 2");
   await page.click("input.submitBtn.homeDomain[type=submit]");
   console.log("[start] hoge 3");
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  await page.screenshot({ path: 'screenshot.png' });
+  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");

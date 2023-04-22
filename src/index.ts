@@ -83,7 +83,7 @@ dotenv.config();
   await page.click("input.submitBtn.homeDomain[type=submit]");
   console.log("[start] hoge 3");
   await page.screenshot({ path: 'tmp/screenshot.png' });
-  // await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
@@ -92,7 +92,7 @@ dotenv.config();
 
   // 9. 画面遷移を待つ
   // console.log("[start] wait for navigation...");
-  // await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // await page.waitForNavigation({ waitUntil: "networkidle0" }); // note: ローカルでは必要
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");

@@ -4,6 +4,7 @@ on:
   schedule:
     # 毎朝10時
     - cron: '0 10 * * *'
+  workflow_dispatch:
 
 jobs:
   crawl:

@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 import dotenv from "dotenv";
 import { notifyToLine } from "./postToLineNotify";
+import { getTimestamp } from "./getTimestamp";
 import { generateDateLabelOnMf } from "./generateDateLabel";
 import { MfTable } from "./MfTable";
 
@@ -95,7 +96,7 @@ dotenv.config();
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");
-  await page.screenshot({ path: "tmp/screenshot.png" });
+  await page.screenshot({ path: `tmp/${getTimestamp()}.png` });
   await page.waitForSelector(
     "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
   );

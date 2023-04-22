@@ -95,8 +95,10 @@ dotenv.config();
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");
-  await page.screenshot({ path: 'tmp/screenshot.png' });
-  await page.waitForSelector("button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached");
+  await page.screenshot({ path: "tmp/screenshot.png" });
+  await page.waitForSelector(
+    "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
+  );
   await page.click(
     "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
   );

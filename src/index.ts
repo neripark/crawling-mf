@@ -21,7 +21,7 @@ dotenv.config();
   const page = await browser.newPage();
   page.setDefaultTimeout(
     // note: GitHub Actions 上でだけタイムアウトで落ちるため
-    process.env.NODE_ENV === "production" ? 300000 : page.getDefaultTimeout()
+    process.env.NODE_ENV === "production" ? 600000 : page.getDefaultTimeout()
   );
 
   // 1. 目的の画面に遷移
@@ -37,8 +37,11 @@ dotenv.config();
   console.log("[start] input email...");
   console.log("content:", await page.content());
   await page.waitForSelector("input[type='email']");
+  console.log("[start] hoge 1");
   await page.type("input[type='email']", process.env.LOGIN_EMAIL);
+  console.log("[start] hoge 2");
   await page.click("input.submitBtn.homeDomain[type=submit]");
+  console.log("[start] hoge 2");
   await page.waitForNavigation();
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ

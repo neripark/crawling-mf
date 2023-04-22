@@ -27,36 +27,35 @@ dotenv.config();
 
   // _____________________________________________________________________________________
 
-  const ALLOWED_RESOURCE_TYPES = ["document", "xhr", "fetch"];
+  // const ALLOWED_RESOURCE_TYPES = ["document", "xhr", "fetch"];
+  // page.on("response", async (response) => {
+  //   // プリフライトリクエストに対するレスポンスの場合は処理をスキップする
+  //   const request = response.request();
+  //   if (request.method() === 'OPTIONS') {
+  //     // console.log("preflight のためスキップします。");
+  //     return;
+  //   }
+  //   // console.log(`****** response log start ******`);
+  //   if (response.status() >= 300 && response.status() <= 399) {
+  //     // console.log(`Redirect response URL: ${response.url()}`);
+  //     // console.log(`Redirect status code: ${response.status()}`);
+  //     // console.log(`****** response log end ******`);
+  //     return;
+  //   }
 
-  page.on("response", async (response) => {
-    // プリフライトリクエストに対するレスポンスの場合は処理をスキップする
-    const request = response.request();
-    if (request.method() === 'OPTIONS') {
-      // console.log("preflight のためスキップします。");
-      return;
-    }
-    // console.log(`****** response log start ******`);
-    if (response.status() >= 300 && response.status() <= 399) {
-      // console.log(`Redirect response URL: ${response.url()}`);
-      // console.log(`Redirect status code: ${response.status()}`);
-      // console.log(`****** response log end ******`);
-      return;
-    }
+  //   const resourceType = response.request().resourceType();
+  //   if (!ALLOWED_RESOURCE_TYPES.includes(resourceType)) {
+  //     // console.log("resouceType が指定と違うためスキップします。");
+  //     // console.log(`****** response log end ******`);
+  //     return;
+  //   }
 
-    const resourceType = response.request().resourceType();
-    if (!ALLOWED_RESOURCE_TYPES.includes(resourceType)) {
-      // console.log("resouceType が指定と違うためスキップします。");
-      // console.log(`****** response log end ******`);
-      return;
-    }
-
-    console.log(`Response URL: ${response.url()}`);
-    console.log(`Response headers: ${JSON.stringify(response.headers())}`);
-    const text = await response.text();
-    console.log(`Response body: ${text}`);
-    console.log(`***********************************`);
-  });
+  //   console.log(`Response URL: ${response.url()}`);
+  //   console.log(`Response headers: ${JSON.stringify(response.headers())}`);
+  //   const text = await response.text();
+  //   console.log(`Response body: ${text}`);
+  //   console.log(`***********************************`);
+  // });
   // _____________________________________________________________________________________
 
   // 1. 目的の画面に遷移
@@ -83,7 +82,7 @@ dotenv.config();
   console.log("[start] hoge 2");
   await page.click("input.submitBtn.homeDomain[type=submit]");
   console.log("[start] hoge 3");
-  await page.waitForNavigation();
+  await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");

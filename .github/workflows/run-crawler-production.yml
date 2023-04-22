@@ -10,7 +10,7 @@ jobs:
   crawl:
     runs-on: ubuntu-latest
     env:
-      LOGIN_EMAIL: testtest
+      LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
       LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
       LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
     steps:

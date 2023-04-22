@@ -26,13 +26,19 @@ dotenv.config();
   );
 
   // _____________________________________________________________________________________
-  page.on("response", (response) => {
+  page.on("response", async (response) => {
     console.log(`****** response log start ******`);
+    if (response.status() >= 300 && response.status() <= 399) {
+      console.log(`Redirect response URL: ${response.url()}`);
+      console.log(`Redirect status code: ${response.status()}`);
+      console.log(`****** response log end ******`);
+      return;
+    }
+
     console.log(`Response URL: ${response.url()}`);
     console.log(`Response headers: ${JSON.stringify(response.headers())}`);
-    response.text().then((text) => {
-      console.log(`Response body: ${text}`);
-    });
+    // const text = await response.text();
+    // console.log(`Response body: ${text}`);
     console.log(`****** response log end ******`);
   });
   // _____________________________________________________________________________________
@@ -62,64 +68,64 @@ dotenv.config();
   await page.type("input[type='password']", process.env.LOGIN_PASSWORD);
   await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
 
-  // 9. 画面遷移を待つ
-  console.log("[start] wait for navigation...");
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // // 9. 画面遷移を待つ
+  // console.log("[start] wait for navigation...");
+  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
-  // 10. 表示を先月に切り替える
-  console.log("[start] change view to last month...");
-  await page.click(
-    "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
-  );
+  // // 10. 表示を先月に切り替える
+  // console.log("[start] change view to last month...");
+  // await page.click(
+  //   "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
+  // );
 
-  // 11. 特定の要素のテキストが `前月1日〜前月末日`となっていることを確認する
-  await page.waitForSelector(".fc-header-title.in-out-header-title h2");
+  // // 11. 特定の要素のテキストが `前月1日〜前月末日`となっていることを確認する
+  // await page.waitForSelector(".fc-header-title.in-out-header-title h2");
 
-  // note: ブラウザ側に渡される関数だが、使用する変数は連れて行ってはくれないので、第3引数に記述して渡す必要がある
-  console.log("[start] wait for display last month...");
-  const pastMonthLabel = await page.evaluate(
-    (label) => label,
-    generateDateLabelOnMf()
-  );
-  await page.waitForFunction(
-    (expectedLabel) => {
-      const element = document.querySelector(
-        ".fc-header-title.in-out-header-title h2"
-      );
-      if (element) {
-        const text = element.textContent!.trim();
-        return text === expectedLabel;
-      }
-      return false;
-    },
-    { timeout: 50000 },
-    pastMonthLabel
-  );
+  // // note: ブラウザ側に渡される関数だが、使用する変数は連れて行ってはくれないので、第3引数に記述して渡す必要がある
+  // console.log("[start] wait for display last month...");
+  // const pastMonthLabel = await page.evaluate(
+  //   (label) => label,
+  //   generateDateLabelOnMf()
+  // );
+  // await page.waitForFunction(
+  //   (expectedLabel) => {
+  //     const element = document.querySelector(
+  //       ".fc-header-title.in-out-header-title h2"
+  //     );
+  //     if (element) {
+  //       const text = element.textContent!.trim();
+  //       return text === expectedLabel;
+  //     }
+  //     return false;
+  //   },
+  //   { timeout: 50000 },
+  //   pastMonthLabel
+  // );
 
-  // 12. 特定のtable要素が表示されるのを待つ
-  console.log("[start] wait for display target table...");
-  await page.waitForSelector("table#cf-detail-table");
+  // // 12. 特定のtable要素が表示されるのを待つ
+  // console.log("[start] wait for display target table...");
+  // await page.waitForSelector("table#cf-detail-table");
 
-  const serializedTable = await page.evaluate(() => {
-    // todo: MfTableクラス側に寄せる
-    const table = document.querySelector("table#cf-detail-table");
-    if (table === null) throw new Error("対象テーブルが見つかりませんでした。");
-    // note: DOMのままではNode.jsに渡せないためいったん文字列にする
-    return table.outerHTML;
-  });
+  // const serializedTable = await page.evaluate(() => {
+  //   // todo: MfTableクラス側に寄せる
+  //   const table = document.querySelector("table#cf-detail-table");
+  //   if (table === null) throw new Error("対象テーブルが見つかりませんでした。");
+  //   // note: DOMのままではNode.jsに渡せないためいったん文字列にする
+  //   return table.outerHTML;
+  // });
 
   // Puppeteer の終了
   await browser.close();
 
-  console.log("[start] serialize target table and format message...");
-  const mfTable = new MfTable(serializedTable);
-  const msg = mfTable.getRowsSimpleString();
+  // console.log("[start] serialize target table and format message...");
+  // const mfTable = new MfTable(serializedTable);
+  // const msg = mfTable.getRowsSimpleString();
 
-  console.log(msg);
+  // console.log(msg);
 
-  // todo: 長いと見切れるため、分割送信するかどうか決める
-  await notifyToLine(msg ?? "テキストが見つかりませんでした。");
+  // // todo: 長いと見切れるため、分割送信するかどうか決める
+  // await notifyToLine(msg ?? "テキストが見つかりませんでした。");
 
-  console.log("----------------------------------");
-  console.log("done.");
+  // console.log("----------------------------------");
+  // console.log("done.");
 })();

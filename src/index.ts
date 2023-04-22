@@ -20,7 +20,7 @@ dotenv.config();
     headless: process.env.NODE_ENV === "production",
   });
   const page = await browser.newPage();
-  const TIMEOUT = 300000;
+  const TIMEOUT = 30000;
   page.setDefaultTimeout(
     // note: GitHub Actions 上でだけタイムアウトで落ちるため
     process.env.NODE_ENV === "production" ? TIMEOUT : page.getDefaultTimeout()

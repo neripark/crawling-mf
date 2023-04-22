@@ -75,7 +75,7 @@ dotenv.config();
 
   // 2. email のインプットボックスにメールアドレスを入力して次へ
   console.log("[start] input email...");
-  console.log("content:", await page.content());
+  // console.log("content:", await page.content());
   await page.waitForSelector("input[type='email']");
   console.log("[start] hoge 1");
   await page.type("input[type='email']", process.env.LOGIN_EMAIL);
@@ -96,6 +96,7 @@ dotenv.config();
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");
   await page.screenshot({ path: 'tmp/screenshot.png' });
+  await page.waitForSelector("button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached");
   await page.click(
     "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached"
   );

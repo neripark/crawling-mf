@@ -24,6 +24,18 @@ dotenv.config();
     process.env.NODE_ENV === "production" ? 600000 : page.getDefaultTimeout()
   );
 
+  // _____________________________________________________________________________________
+  page.on("response", (response) => {
+    console.log(`****** response log start ******`);
+    console.log(`Response URL: ${response.url()}`);
+    console.log(`Response headers: ${JSON.stringify(response.headers())}`);
+    response.text().then((text) => {
+      console.log(`Response body: ${text}`);
+      console.log(`****** response log end ******`);
+    });
+  });
+  // _____________________________________________________________________________________
+
   // 1. 目的の画面に遷移
   // note: ユーザーエージェント偽装しないとサーバーに弾かれる
   await page.setUserAgent(

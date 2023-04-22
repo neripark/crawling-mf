@@ -26,7 +26,16 @@ dotenv.config();
   );
 
   // _____________________________________________________________________________________
+
+  const ALLOWED_RESOURCE_TYPES = ["document", "xhr", "fetch"];
+
   page.on("response", async (response) => {
+    // プリフライトリクエストに対するレスポンスの場合は処理をスキップする
+    const request = response.request();
+    if (request.method() === 'OPTIONS') {
+      console.log("preflight のためスキップします。");
+      return;
+    }
     console.log(`****** response log start ******`);
     if (response.status() >= 300 && response.status() <= 399) {
       console.log(`Redirect response URL: ${response.url()}`);
@@ -35,10 +44,17 @@ dotenv.config();
       return;
     }
 
+    const resourceType = response.request().resourceType();
+    if (!ALLOWED_RESOURCE_TYPES.includes(resourceType)) {
+      console.log("resouceType が指定と違うためスキップします。");
+      console.log(`****** response log end ******`);
+      return;
+    }
+
     console.log(`Response URL: ${response.url()}`);
     console.log(`Response headers: ${JSON.stringify(response.headers())}`);
-    // const text = await response.text();
-    // console.log(`Response body: ${text}`);
+    const text = await response.text();
+    console.log(`Response body: ${text}`);
     console.log(`****** response log end ******`);
   });
   // _____________________________________________________________________________________
@@ -66,7 +82,7 @@ dotenv.config();
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
   await page.type("input[type='password']", process.env.LOGIN_PASSWORD);
-  await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
+  // await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
 
   // // 9. 画面遷移を待つ
   // console.log("[start] wait for navigation...");

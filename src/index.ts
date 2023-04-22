@@ -19,7 +19,10 @@ dotenv.config();
     headless: process.env.NODE_ENV === "production",
   });
   const page = await browser.newPage();
-  // page.setDefaultTimeout(5000);
+  page.setDefaultTimeout(
+    // note: GitHub Actions 上でだけタイムアウトで落ちるため
+    process.env.NODE_ENV === "production" ? 60000 : page.getDefaultTimeout()
+  );
 
   // 1. 目的の画面に遷移
   // note: ユーザーエージェント偽装しないとサーバーに弾かれる

@@ -30,12 +30,12 @@ dotenv.config();
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
   );
   console.log("[start] visit site...");
-  console.log(page.content());
   await page.goto("https://moneyforward.com/cf#daily_info");
   await page.click('a[href^="/sign_in/email"]');
 
   // 2. email のインプットボックスにメールアドレスを入力して次へ
   console.log("[start] input email...");
+  console.log("content:", page.content());
   await page.waitForSelector("input[type='email']");
   await page.type("input[type='email']", process.env.LOGIN_EMAIL);
   await page.click("input.submitBtn.homeDomain[type=submit]");

@@ -8,9 +8,9 @@ dotenv.config();
 
 (async () => {
   if (
-    process.env.LOGIN_EMAIL === undefined ||
-    process.env.LOGIN_PASSWORD === undefined ||
-    process.env.LINE_NOTIFY_TOKEN === undefined
+    !process.env.LOGIN_EMAIL ||
+    !process.env.LOGIN_PASSWORD ||
+    !process.env.LINE_NOTIFY_TOKEN
   ) {
     throw new Error("必要な環境変数がありません。");
   }

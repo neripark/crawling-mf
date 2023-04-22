@@ -66,8 +66,8 @@ dotenv.config();
     generateDateLabelOnMf()
   );
   await page.waitForFunction(
-    (expectedLabel) => {
-      const element = document.querySelector(SELECTOR_DATE_LABEL);
+    (expectedLabel, selector) => {
+      const element = document.querySelector(selector);
       if (element) {
         const text = element.textContent!.trim();
         return text === expectedLabel;
@@ -75,7 +75,8 @@ dotenv.config();
       return false;
     },
     { timeout: 50000 },
-    pastMonthLabel
+    pastMonthLabel,
+    SELECTOR_DATE_LABEL
   );
 
   // 12. 特定のtable要素が表示されるのを待つ
@@ -83,13 +84,13 @@ dotenv.config();
   const SELECTOR_TABLE = "table#cf-detail-table";
   await page.waitForSelector(SELECTOR_TABLE);
 
-  const serializedTable = await page.evaluate(() => {
+  const serializedTable = await page.evaluate((selector) => {
     // todo: MfTableクラス側に寄せる
-    const table = document.querySelector(SELECTOR_TABLE);
+    const table = document.querySelector(selector);
     if (table === null) throw new Error("対象テーブルが見つかりませんでした。");
     // note: DOMのままではNode.jsに渡せないためいったん文字列にする
     return table.outerHTML;
-  });
+  }, SELECTOR_TABLE);
 
   // Puppeteer の終了
   await browser.close();

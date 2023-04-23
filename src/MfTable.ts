@@ -68,9 +68,12 @@ export class MfTable {
 
   public getRowsSimpleString(): string {
     return this.rows
+      .filter((row) => {
+        return row.content.startsWith("💰") || row.content.startsWith("💸");
+      })
       .map((row) => {
         return `${row.dateText} ${row.number} ${row.content}`;
       })
-      .join("N");
+      .join("\n");
   }
 }

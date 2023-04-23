@@ -71,6 +71,6 @@ export class MfTable {
       .map((row) => {
         return `${row.dateText} ${row.number} ${row.content}`;
       })
-      .join("N");
+      .join("\n");
   }
 }

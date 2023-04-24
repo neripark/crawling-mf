@@ -97,7 +97,7 @@ dotenv.config();
 
   console.log("[start] serialize target table and format message...");
   const mfTable = new MfTable(serializedTable);
-  const msg = mfTable.getRowsSimpleString();
+  const msg = mfTable.getMessage();
 
   // todo: 長いと見切れるため、分割送信するかどうか決める
   await notifyToLine(msg ?? "テキストが見つかりませんでした。");

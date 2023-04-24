@@ -1,4 +1,5 @@
 import { stringToNumber } from "./stringToNumber";
+import { getMessageByDiff } from "./getMessageByDiff";
 import { JSDOM } from "jsdom";
 
 interface NonNullableRowElements {
@@ -18,6 +19,8 @@ interface Row {
 export class MfTable {
   private rowElements: NonNullableRowElements[];
   private rows: Row[];
+  private EMOJI_1 = "💰";
+  private EMOJI_2 = "💸";
 
   // note: 文字列でシリアライズされたTableを受け取る想定
   constructor(table: string) {
@@ -66,14 +69,44 @@ export class MfTable {
     return _rows;
   }
 
-  public getRowsSimpleString(): string {
-    return this.rows
-      .filter((row) => {
-        return row.content.startsWith("💰") || row.content.startsWith("💸");
-      })
-      .map((row) => {
-        return `${row.dateText} ${row.number} ${row.content}`;
-      })
-      .join("\n");
+  private filterRowsByAllEmoji() {
+    const rows = this.rows.filter((row) => {
+      return (
+        row.content.startsWith(this.EMOJI_1) ||
+        row.content.startsWith(this.EMOJI_2)
+      );
+    });
+    return rows;
+  }
+
+  private filterRowsBySpecificEmoji(emoji: string) {
+    const rows = this.rows.filter((row) => {
+      return row.content.startsWith(emoji);
+    });
+    return rows;
+  }
+
+  private calcDiff() {
+    const sumEmoji1 = this.filterRowsBySpecificEmoji(this.EMOJI_1).reduce(
+      (acc, current) => acc + current.number,
+      0
+    );
+    const sumEmoji2 = this.filterRowsBySpecificEmoji(this.EMOJI_2).reduce(
+      (acc, current) => acc + current.number,
+      0
+    );
+    return getMessageByDiff(
+      { key: this.EMOJI_1, price: sumEmoji1 },
+      { key: this.EMOJI_2, price: sumEmoji2 }
+    );
+  }
+
+  public getMessage(): string {
+    const emojiRows = this.filterRowsByAllEmoji().map((row) => {
+      return `${row.dateText} ${row.number} ${row.content}`;
+    });
+    const msgList = emojiRows.join("\n");
+    const msgSummary = this.calcDiff();
+    return `\nおさいふから出した会計の一覧:\n${msgList}\n\n計算結果:\n${msgSummary}`;
   }
 }

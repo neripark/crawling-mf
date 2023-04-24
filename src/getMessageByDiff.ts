@@ -3,7 +3,7 @@ interface Item {
   price: number;
 }
 
-export const calcDiff = (item1: Item, item2: Item) => {
+export const getMessageByDiff = (item1: Item, item2: Item) => {
   if (item1.price > 0 || item2.price > 0) {
     throw new Error(
       "価格が正の数になっているレコードがあります。支出なので、必ず負の数のはずです。"

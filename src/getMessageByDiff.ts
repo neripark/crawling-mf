@@ -6,7 +6,7 @@ interface Item {
 export const getMessageByDiff = (item1: Item, item2: Item) => {
   if (item1.price > 0 || item2.price > 0) {
     throw new Error(
-      "小計が正の数になっている絵文字があります。支出なので、必ず負の数のはずです。"
+      "正の数になっている小計があります。支出なので、必ず負の数のはずです。"
     );
   }
   const diff = Math.abs(item1.price) - Math.abs(item2.price);

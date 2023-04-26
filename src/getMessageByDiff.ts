@@ -9,12 +9,34 @@ export const getMessageByDiff = (item1: Item, item2: Item) => {
       "小計が正の数になっている絵文字があります。支出なので、必ず負の数のはずです。"
     );
   }
-  const sum = Math.abs(item1.price) - Math.abs(item2.price);
-  if (sum > 0) {
-    return `${item1.key}のほうが${Math.abs(sum).toLocaleString()}円多いです。`;
-  } else if (sum === 0) {
+  const diff = Math.abs(item1.price) - Math.abs(item2.price);
+  if (diff > 0) {
+    return getResultMessage({
+      receivingSideKey: item1.key,
+      payingSideKey: item2.key,
+      diff,
+    });
+  } else if (diff === 0) {
     return `${item1.key}も${item2.key}も、ぴったり同じ金額です。`;
   } else {
-    return `${item2.key}のほうが${Math.abs(sum).toLocaleString()}円多いです。`;
+    return getResultMessage({
+      receivingSideKey: item2.key,
+      payingSideKey: item1.key,
+      diff,
+    });
   }
+};
+
+const getResultMessage = (props: {
+  receivingSideKey: string;
+  payingSideKey: string;
+  diff: number;
+}) => {
+  const half = Math.floor(props.diff / 2);
+  return `${props.receivingSideKey}のほうが${Math.abs(
+    props.diff
+  ).toLocaleString()}円多いです。
+${props.payingSideKey}が${props.receivingSideKey}に${Math.abs(
+    half
+  ).toLocaleString()}円払いましょう！`;
 };

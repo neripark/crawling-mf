@@ -2,8 +2,8 @@ name: Run Crawler (production)
 
 on:
   schedule:
-    # 毎朝10時
-    - cron: '0 10 * * *'
+    # 毎月1日の19時
+    - cron: '0 10 1 * *'
   workflow_dispatch:
 
 jobs:

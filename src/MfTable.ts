@@ -52,20 +52,22 @@ export class MfTable {
   }
 
   private exchange() {
-    const _rows = this.rowElements.map((element) => {
-      return {
-        dateText: element.date.querySelector("span")?.textContent ?? "",
-        sortKey:
-          element.date.attributes.getNamedItem("data-table-sortable-value")
-            ?.value ?? "",
-        content: element.content.textContent?.trim() ?? "",
-        // note: 編集可能項目と不可能項目でセレクタが違うため複数抽出
-        number: stringToNumber(
-          element.number.querySelectorAll(".noform > span, span.offset")[0]
-            .textContent ?? ""
-        ),
-      };
-    });
+    const _rows = this.rowElements
+      .map((element) => {
+        return {
+          dateText: element.date.querySelector("span")?.textContent ?? "",
+          sortKey:
+            element.date.attributes.getNamedItem("data-table-sortable-value")
+              ?.value ?? "",
+          content: element.content.textContent?.trim() ?? "",
+          // note: 編集可能項目と不可能項目でセレクタが違うため複数抽出
+          number: stringToNumber(
+            element.number.querySelectorAll(".noform > span, span.offset")[0]
+              .textContent ?? ""
+          ),
+        };
+      })
+      .sort((a, b) => (a.sortKey < b.sortKey ? -1 : 1));
     return _rows;
   }
 
@@ -103,7 +105,7 @@ export class MfTable {
 
   public getMessage(): string {
     const emojiRows = this.filterRowsByAllEmoji().map((row) => {
-      return `${row.dateText} ${row.number} ${row.content}`;
+      return `${row.dateText} ${row.number.toLocaleString()} ${row.content}`;
     });
     const msgList = emojiRows.join("\n");
     const msgSummary = this.calcDiff();

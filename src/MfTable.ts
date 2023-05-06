@@ -105,7 +105,7 @@ export class MfTable {
 
   public getMessage(): string {
     const emojiRows = this.filterRowsByAllEmoji().map((row) => {
-      return `${row.dateText} ${row.number} ${row.content}`;
+      return `${row.dateText} ${row.number.toLocaleString()} ${row.content}`;
     });
     const msgList = emojiRows.join("\n");
     const msgSummary = this.calcDiff();

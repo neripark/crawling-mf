@@ -24,7 +24,7 @@
   "homepage": "https://github.com/neripark/crawling-mf#readme",
   "dependencies": {
     "@types/jsdom": "^21.1.1",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "jsdom": "^21.1.1",
     "puppeteer": "^19.9.0",

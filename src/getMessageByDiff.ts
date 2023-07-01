@@ -9,6 +9,9 @@ export const getMessageByDiff = (item1: Item, item2: Item) => {
       "正の数になっている小計があります。支出なので、必ず負の数のはずです。"
     );
   }
+  if (item1.price === 0 && item2.price === 0) {
+    return "0件なので計算しませんでした。";
+  }
   const diff = Math.abs(item1.price) - Math.abs(item2.price);
   if (diff > 0) {
     return getResultMessage({

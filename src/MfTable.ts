@@ -107,7 +107,7 @@ export class MfTable {
     const emojiRows = this.filterRowsByAllEmoji().map((row) => {
       return `${row.dateText} ${row.number.toLocaleString()} ${row.content}`;
     });
-    const msgList = emojiRows.join("\n");
+    const msgList = emojiRows.length !== 0 ? emojiRows.join("\n") : "なし";
     const msgSummary = this.calcDiff();
     return `\nおさいふから出した会計の一覧:\n${msgList}\n\n計算結果:\n${msgSummary}`;
   }

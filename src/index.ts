@@ -38,7 +38,8 @@ dotenv.config();
   await page.waitForSelector("input[type='email']");
   await page.type("input[type='email']", process.env.LOGIN_EMAIL);
   await page.click("input.submitBtn.homeDomain[type=submit]");
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // note: networkidle0 だと動かなくなっていた
+  await page.waitForNavigation({ waitUntil: "domcontentloaded" });
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
@@ -50,8 +51,9 @@ dotenv.config();
   await page.click("a[data-ga-mfid=passkey_rejected]");
 
   // 9. 画面遷移を待つ
-  console.log("[start] wait for navigation...");
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // console.log("[start] wait for navigation...");
+  // note: ローカルではwaitForNavigationすると動かない。
+  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");

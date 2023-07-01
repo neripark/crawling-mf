@@ -45,6 +45,10 @@ dotenv.config();
   await page.type("input[type='password']", process.env.LOGIN_PASSWORD);
   await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
 
+  // 8. 生体認証を勧められるので`あとで登録`をクリックする
+  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  await page.click("a[data-ga-mfid=passkey_rejected]");
+
   // 9. 画面遷移を待つ
   console.log("[start] wait for navigation...");
   await page.waitForNavigation({ waitUntil: "networkidle0" });

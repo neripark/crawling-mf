@@ -47,8 +47,10 @@ dotenv.config();
   await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
 
   // 8. 生体認証を勧められるので`あとで登録`をクリックする
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
-  await page.click("a[data-ga-mfid=passkey_rejected]");
+  console.log("[start] skip biometrics page...");
+  const SELECTOR_REJECT_LINK = "a[data-ga-mfid=passkey_rejected]";
+  await page.waitForSelector(SELECTOR_REJECT_LINK);
+  await page.click(SELECTOR_REJECT_LINK);
 
   // 9. 画面遷移を待つ
   // console.log("[start] wait for navigation...");

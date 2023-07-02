@@ -55,7 +55,7 @@ dotenv.config();
   // 9. 画面遷移を待つ
   console.log("[start] wait for navigation...");
   // note: ローカルではwaitForNavigationすると動かない。
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  await page.waitForNavigation({ waitUntil: "domcontentloaded" });
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");

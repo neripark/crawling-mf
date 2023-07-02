@@ -49,8 +49,11 @@ dotenv.config();
   // 8. 生体認証を勧められるので`あとで登録`をクリックする
   console.log("[start] skip biometrics page...");
   const SELECTOR_REJECT_LINK = "a[data-ga-mfid=passkey_rejected]";
+  console.log("log 1");
   await page.waitForSelector(SELECTOR_REJECT_LINK);
+  console.log("log 2");
   await page.click(SELECTOR_REJECT_LINK);
+  console.log("log 3");
 
   // 9. 画面遷移を待つ
   console.log("[start] wait for navigation...");

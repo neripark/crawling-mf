@@ -16,7 +16,7 @@ dotenv.config();
   }
 
   const browser = await puppeteer.launch({
-    headless: process.env.NODE_ENV === "production",
+    headless: process.env.NODE_ENV === "production" ? "new" : false,
   });
   const page = await browser.newPage();
   page.setDefaultTimeout(

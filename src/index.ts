@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { notifyToLine } from "./postToLineNotify";
 import { generateDateLabelOnMf } from "./generateDateLabel";
 import { MfTable } from "./MfTable";
+import { ss } from "./getScreenshot";
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ dotenv.config();
   console.log("[start] skip biometrics page...");
   const SELECTOR_REJECT_LINK = "a[data-ga-mfid=passkey_rejected]";
   console.log("log 1");
+  await ss(page);
   await page.waitForSelector(SELECTOR_REJECT_LINK);
   console.log("log 2");
   await page.click(SELECTOR_REJECT_LINK);

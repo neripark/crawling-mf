@@ -45,7 +45,7 @@ dotenv.config();
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
   await page.type("input[type='password']", process.env.LOGIN_PASSWORD);
-  await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
+  await page.click("input[type=submit]");
 
   // 8. 生体認証を勧められるので`あとで登録`をクリックする
   console.log("[start] skip biometrics page...");

@@ -19,7 +19,16 @@ jobs:
         run: npm ci
       - name: Run Crawler
         run: npm run main:prd
+        # note: GitHub Actions 上でスクリーンショットを取る際にコメントアウト
+        # continue-on-error: true
         env:
           LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
+      # note: GitHub Actions 上でスクリーンショットを取る際にコメントアウト
+      # - name: Download screenshot
+      #   uses: actions/upload-artifact@v3
+      #   if: always()
+      #   with:
+      #     name: screenshot
+      #     path: tmp/

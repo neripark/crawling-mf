@@ -11,3 +11,12 @@
 $ cp .env.example .env # and edit
 $ npm ci
 ```
+
+# デバッグ
+
+## GitHub Actions 上でスクリーンショットを撮り、確認する
+
+- `.github/workflows/run-crawler-production.yml` の artifact の設定をコメントアウトする
+  - 必要に応じて `continue-on-error: true` もコメントアウトする
+    - workflow がエラーで終了する場合はスクリーンショットをダウンロードするステップまでたどり着かないので、無視するオプション
+- `src/getMessageByDiff.ts` から `ss` を import して使う

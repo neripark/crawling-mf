@@ -19,7 +19,6 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   await page.waitForSelector("input[type='email']");
   await page.type("input[type='email']", env.LOGIN_EMAIL);
   await page.click("input.submitBtn.homeDomain[type=submit]");
-  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
@@ -31,11 +30,16 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
 
   // // 8. 生体認証を勧められるので`あとで登録`をクリックする
   // await page.waitForNavigation({ waitUntil: "networkidle0" });
-  // await page.click("a[data-ga-mfid=passkey_rejected]");
+  // note: ローカル（というか日本語ページ）でしか現れないページのため分ける
+  if (process.env.NODE_ENV !== "production") {
+    const SELECTOR_SUBMIT_PASSKEY_REJECT = "a[data-ga-mfid=passkey_rejected]";
+    await page.waitForSelector(SELECTOR_SUBMIT_PASSKEY_REJECT);
+    await page.click(SELECTOR_SUBMIT_PASSKEY_REJECT);
+  }
 
   // 9. 画面遷移を待つ
-  console.log("[start] wait for navigation...");
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // console.log("[start] wait for navigation...");
+  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");

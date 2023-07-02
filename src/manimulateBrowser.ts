@@ -19,12 +19,15 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   await page.waitForSelector("input[type='email']");
   await page.type("input[type='email']", env.LOGIN_EMAIL);
   await page.click("input.submitBtn.homeDomain[type=submit]");
-  await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
+  const SELECTOR_SUBMIT_BUTTON_PASSWORD =
+    "input.VwFkbeOc.submitBtn.homeDomain[type=submit]";
+  await page.waitForSelector(SELECTOR_SUBMIT_BUTTON_PASSWORD);
   await page.type("input[type='password']", env.LOGIN_PASSWORD);
-  await page.click("input.VwFkbeOc.submitBtn.homeDomain[type=submit]");
+  await page.click(SELECTOR_SUBMIT_BUTTON_PASSWORD);
 
   // // 8. 生体認証を勧められるので`あとで登録`をクリックする
   // await page.waitForNavigation({ waitUntil: "networkidle0" });

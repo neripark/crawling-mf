@@ -28,18 +28,14 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   await page.type("input[type='password']", env.LOGIN_PASSWORD);
   await page.click(SELECTOR_SUBMIT_BUTTON_PASSWORD);
 
-  // // 8. 生体認証を勧められるので`あとで登録`をクリックする
-  // await page.waitForNavigation({ waitUntil: "networkidle0" });
+  // 8. 生体認証を勧められるので`あとで登録`をクリックする
   // note: ローカル（というか日本語ページ）でしか現れないページのため分ける
   if (process.env.NODE_ENV !== "production") {
+    console.log("[start] skip recommendation biometrics page...");
     const SELECTOR_SUBMIT_PASSKEY_REJECT = "a[data-ga-mfid=passkey_rejected]";
     await page.waitForSelector(SELECTOR_SUBMIT_PASSKEY_REJECT);
     await page.click(SELECTOR_SUBMIT_PASSKEY_REJECT);
   }
-
-  // 9. 画面遷移を待つ
-  // console.log("[start] wait for navigation...");
-  // await page.waitForNavigation({ waitUntil: "networkidle0" });
 
   // 10. 表示を先月に切り替える
   console.log("[start] change view to last month...");

@@ -8,7 +8,7 @@ export const generateDateLabelOnMf = () => {
 
   const dateString = `${format(firstDayOfLastMonth, "yyyy/MM/dd")} - ${format(
     lastDayOfLastMonth,
-    "yyyy/MM/dd"
+    "yyyy/MM/dd",
   )}`;
 
   return dateString;

@@ -51,7 +51,7 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   console.log("[start] wait for display last month...");
   const pastMonthLabel = await page.evaluate(
     (label) => label,
-    generateDateLabelOnMf()
+    generateDateLabelOnMf(),
   );
   await page.waitForFunction(
     (expectedLabel, selector) => {
@@ -64,7 +64,7 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
     },
     { timeout: 50000 },
     pastMonthLabel,
-    SELECTOR_DATE_LABEL
+    SELECTOR_DATE_LABEL,
   );
 
   // 12. 特定のtable要素が表示されるのを待つ

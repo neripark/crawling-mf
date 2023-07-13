@@ -6,7 +6,7 @@ interface Item {
 export const getMessageByDiff = (item1: Item, item2: Item) => {
   if (item1.price > 0 || item2.price > 0) {
     throw new Error(
-      "正の数になっている小計があります。支出なので、必ず負の数のはずです。"
+      "正の数になっている小計があります。支出なので、必ず負の数のはずです。",
     );
   }
   if (item1.price === 0 && item2.price === 0) {
@@ -37,9 +37,9 @@ const getResultMessage = (props: {
 }) => {
   const half = Math.floor(props.diff / 2);
   return `${props.receivingSideKey}のほうが${Math.abs(
-    props.diff
+    props.diff,
   ).toLocaleString()}円多いです。
 ${props.payingSideKey}が${props.receivingSideKey}に${Math.abs(
-    half
+    half,
   ).toLocaleString()}円払いましょう！`;
 };

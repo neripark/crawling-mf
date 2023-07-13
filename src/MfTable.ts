@@ -31,7 +31,7 @@ export class MfTable {
   private validate(table: string) {
     const _table = new JSDOM(table);
     const rows = _table.window.document.querySelectorAll(
-      ".transaction_list.js-cf-edit-container"
+      ".transaction_list.js-cf-edit-container",
     );
     if (rows.length === 0) throw new Error("テーブル内の行数が0です。");
 
@@ -63,7 +63,7 @@ export class MfTable {
           // note: 編集可能項目と不可能項目でセレクタが違うため複数抽出
           number: stringToNumber(
             element.number.querySelectorAll(".noform > span, span.offset")[0]
-              .textContent ?? ""
+              .textContent ?? "",
           ),
         };
       })
@@ -91,15 +91,15 @@ export class MfTable {
   private calcDiff() {
     const sumEmoji1 = this.filterRowsBySpecificEmoji(this.EMOJI_1).reduce(
       (acc, current) => acc + current.number,
-      0
+      0,
     );
     const sumEmoji2 = this.filterRowsBySpecificEmoji(this.EMOJI_2).reduce(
       (acc, current) => acc + current.number,
-      0
+      0,
     );
     return getMessageByDiff(
       { key: this.EMOJI_1, price: sumEmoji1 },
-      { key: this.EMOJI_2, price: sumEmoji2 }
+      { key: this.EMOJI_2, price: sumEmoji2 },
     );
   }
 

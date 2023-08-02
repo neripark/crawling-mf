@@ -18,12 +18,11 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   console.log("[start] input email...");
   await page.waitForSelector("input[type='email']");
   await page.type("input[type='email']", env.LOGIN_EMAIL);
-  await page.click("input.submitBtn.homeDomain[type=submit]");
+  await page.click("button#submitto");
 
   // 7. パスワードのインプットボックスにパスワードを入力して次へ
   console.log("[start] input password...");
-  const SELECTOR_SUBMIT_BUTTON_PASSWORD =
-    "input.VwFkbeOc.submitBtn.homeDomain[type=submit]";
+  const SELECTOR_SUBMIT_BUTTON_PASSWORD = "button#submitto";
   await page.waitForSelector(SELECTOR_SUBMIT_BUTTON_PASSWORD);
   await page.type("input[type='password']", env.LOGIN_PASSWORD);
   await page.click(SELECTOR_SUBMIT_BUTTON_PASSWORD);
@@ -32,7 +31,7 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   // note: ローカル（というか日本語ページ）でしか現れないページのため分ける
   if (process.env.NODE_ENV !== "production") {
     console.log("[start] skip recommendation biometrics page...");
-    const SELECTOR_SUBMIT_PASSKEY_REJECT = "a[data-ga-mfid=passkey_rejected]";
+    const SELECTOR_SUBMIT_PASSKEY_REJECT = "a[ping$='passkey_rejected']";
     await page.waitForSelector(SELECTOR_SUBMIT_PASSKEY_REJECT);
     await page.click(SELECTOR_SUBMIT_PASSKEY_REJECT);
   }

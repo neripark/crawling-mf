@@ -29,14 +29,21 @@ dotenv.config();
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
   );
 
-  // ブラウザ操作してテーブルを取得する
-  const serializedTable = await manimulateBrowser({
-    page,
-    env: {
-      LOGIN_EMAIL: process.env.LOGIN_EMAIL,
-      LOGIN_PASSWORD: process.env.LOGIN_PASSWORD,
-    },
-  });
+  let serializedTable;
+  try {
+    // ブラウザ操作してテーブルを取得する
+    serializedTable = await manimulateBrowser({
+      page,
+      env: {
+        LOGIN_EMAIL: process.env.LOGIN_EMAIL,
+        LOGIN_PASSWORD: process.env.LOGIN_PASSWORD,
+      },
+    });
+  } catch (error) {
+    const msg = `エラーで結果が取得できませんでした。: ${error}`;
+    await notifyToLine(msg);
+    throw new Error(msg);
+  }
 
   // Puppeteer の終了
   await browser.close();

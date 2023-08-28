@@ -29,7 +29,7 @@
     "jsdom": "^22.1.0",
     "puppeteer": "^20.9.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.3",

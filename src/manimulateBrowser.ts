@@ -12,7 +12,8 @@ interface Props {
 export const manimulateBrowser = async ({ page, env }: Props) => {
   console.log("[start] visit site...");
   await page.goto("https://moneyforward.com/cf#daily_info");
-  await page.click('a[href^="/sign_in/email"]');
+  // note: ログイン方法を選択する画面がなくなっていたのでコメントアウト
+  // await page.click('a[href^="/sign_in/email"]');
 
   // 2. email のインプットボックスにメールアドレスを入力して次へ
   console.log("[start] input email...");

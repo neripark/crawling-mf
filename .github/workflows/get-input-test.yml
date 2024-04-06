@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       months:
-        # type: choice
+        type: choice
         description: How many months to go back
-        # options: 
-        # - 1
-        # - 2
-        # - 3
-        # default: 1
+        options: 
+        - 1
+        - 2
+        - 3
+        default: 1
 
 jobs:
   logger:

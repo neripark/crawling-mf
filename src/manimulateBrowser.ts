@@ -38,35 +38,9 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
     await page.click(SELECTOR_SUBMIT_PASSKEY_REJECT);
   }
 
-  // 10. 表示を先月に切り替える
-  console.log("[start] change view to last month...");
-  const SELECTOR_BUTTON =
-    "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached";
-  await page.waitForSelector(SELECTOR_BUTTON);
-  await page.click(SELECTOR_BUTTON);
-
-  // 11. 特定の要素のテキストが `前月1日〜前月末日`となっていることを確認する
-  const SELECTOR_DATE_LABEL = ".fc-header-title.in-out-header-title h2";
-  await page.waitForSelector(SELECTOR_DATE_LABEL);
-  // note: ブラウザ側に渡される関数だが、使用する変数は連れて行ってはくれないので、第3引数に記述して渡す必要がある
-  console.log("[start] wait for display last month...");
-  const pastMonthLabel = await page.evaluate(
-    (label) => label,
-    generateDateLabelOnMf(),
-  );
-  await page.waitForFunction(
-    (expectedLabel, selector) => {
-      const element = document.querySelector(selector);
-      if (element) {
-        const text = element.textContent!.trim();
-        return text === expectedLabel;
-      }
-      return false;
-    },
-    { timeout: 50000 },
-    pastMonthLabel,
-    SELECTOR_DATE_LABEL,
-  );
+  // 10. 表示月を遡る
+  console.log("[start] change view to target month...");
+  await backMonths(page, 2);
 
   // 12. 特定のtable要素が表示されるのを待つ
   console.log("[start] wait for display target table...");
@@ -82,4 +56,50 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   }, SELECTOR_TABLE);
 
   return serializedTable;
+};
+
+/**
+ *
+ * 指定の数だけ対象の月を遡る関数
+ *
+ * @param page puppeteerのpageオブジェクト
+ * @param numberToBack 何ヶ月遡るか。デフォルト:1
+ * @todo 別のファイルに切り出す
+ */
+const backMonths = async (page: Page, numberToBack: number) => {
+  for (let i = 1; i <= numberToBack; i++) {
+    // 10. 1ヶ月前に戻る
+    await backToLastMonth(page);
+    // 11. ラベルが変わるまで待つ
+    const targetLabel = generateDateLabelOnMf(i);
+    await waitLabelToBeTargetLabel(page, targetLabel);
+  }
+};
+
+const backToLastMonth = async (page: Page) => {
+  const SELECTOR_BUTTON =
+    "button.btn.fc-button.fc-button-prev.spec-fc-button-click-attached";
+  await page.waitForSelector(SELECTOR_BUTTON);
+  await page.click(SELECTOR_BUTTON);
+};
+
+const waitLabelToBeTargetLabel = async (page: Page, targetLabel: string) => {
+  const SELECTOR_DATE_LABEL = ".fc-header-title.in-out-header-title h2";
+  await page.waitForSelector(SELECTOR_DATE_LABEL);
+  // note: ブラウザ側に渡される関数だが、使用する変数は連れて行ってはくれないので、第3引数に記述して渡す必要がある
+  console.log("[start] wait for display target month...");
+  const pastMonthLabel = await page.evaluate((label) => label, targetLabel);
+  await page.waitForFunction(
+    (expectedLabel, selector) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        const text = element.textContent!.trim();
+        return text === expectedLabel;
+      }
+      return false;
+    },
+    { timeout: 50000 },
+    pastMonthLabel,
+    SELECTOR_DATE_LABEL,
+  );
 };

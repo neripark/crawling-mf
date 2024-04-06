@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-export const manimulateBrowser = async ({ page, env }: Props) => {
+export const manipulateBrowser = async ({ page, env }: Props) => {
   console.log("[start] visit site...");
   await page.goto("https://moneyforward.com/cf#daily_info");
   // note: ログイン方法を選択する画面がなくなっていたのでコメントアウト

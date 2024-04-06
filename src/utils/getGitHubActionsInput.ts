@@ -5,7 +5,7 @@ export const getGitHubActionsInput = async (
 ): Promise<string> => {
   try {
     const input = getInput(inputName);
-    console.log(`[INFO] input from GitHub Actions '${inputName}': `, input);
+    console.log(`[INFO] input from GitHub Actions '${inputName}':`, input);
     return input;
   } catch (error) {
     if (error instanceof Error) {

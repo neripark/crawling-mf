@@ -3,7 +3,7 @@ name: Get Input (Test)
 on:
   workflow_dispatch:
     inputs:
-      gobackmonth:
+      MONTHS_TO_GO_BACK:
         type: choice
         description: How many months to go back
         options: 
@@ -23,5 +23,5 @@ jobs:
           node-version: '18.15.0'
       - name: Install Dependencies
         run: npm ci
-      - name: Run Crawler
+      - name: Run Logger
         run: npm run get-input-test

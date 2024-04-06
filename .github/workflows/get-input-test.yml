@@ -27,3 +27,5 @@ jobs:
         run: env
       - name: Run Logger
         run: npm run get-input-test
+        env:
+          INPUT_MONTHS: ${{ github.event.inputs.months }}

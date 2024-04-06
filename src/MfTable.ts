@@ -1,4 +1,4 @@
-import { stringToNumber } from "./stringToNumber";
+import { stringToNumber } from "./utils/stringToNumber";
 import { getMessageByDiff } from "./getMessageByDiff";
 import { JSDOM } from "jsdom";
 

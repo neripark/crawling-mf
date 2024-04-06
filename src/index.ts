@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import dotenv from "dotenv";
-import { notifyToLine } from "./postToLineNotify";
+import { notifyToLine } from "./repositories/postToLineNotify";
 import { MfTable } from "./MfTable";
 import { manimulateBrowser } from "./manimulateBrowser";
 

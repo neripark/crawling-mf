@@ -1,6 +1,6 @@
 import type { Page } from "puppeteer";
-import { generateDateLabelOnMf } from "./generateDateLabel";
-import { getGitHubActionsInput } from "./utils/getGitHubActionsInput";
+import { generateDateLabelOnMf } from "./functions/generateDateLabel";
+import { getGitHubActionsInput } from "../utils/getGitHubActionsInput";
 
 interface Props {
   page: Page;

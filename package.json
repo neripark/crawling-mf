@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "format": "prettier --write **/*.ts *.md --ignore-path .gitignore",
-    "format-check": "prettier --check **/*.ts *.md --ignore-path .gitignore",
+    "format": "prettier --write './**/*.ts' *.md --ignore-path .gitignore",
+    "format-check": "prettier --check './**/*.ts' *.md --ignore-path .gitignore",
     "main": "ts-node src/index.ts",
     "main:prd": "NODE_ENV=production ts-node src/index.ts",
     "get-input-test": "ts-node src/getInputTest.ts",

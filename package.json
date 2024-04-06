@@ -6,9 +6,8 @@
   "scripts": {
     "format": "prettier --write './**/*.ts' *.md --ignore-path .gitignore",
     "format-check": "prettier --check './**/*.ts' *.md --ignore-path .gitignore",
-    "main": "ts-node src/index.ts",
-    "main:prd": "NODE_ENV=production ts-node src/index.ts",
-    "get-input-test": "ts-node src/getInputTest.ts",
+    "main": "ts-node src/main/index.ts",
+    "main:prd": "NODE_ENV=production ts-node src/main/index.ts",
     "type-check": "tsc --noEmit",
     "test": "jest"
   },

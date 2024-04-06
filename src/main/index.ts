@@ -1,8 +1,8 @@
 import puppeteer from "puppeteer";
 import dotenv from "dotenv";
-import { notifyToLine } from "./postToLineNotify";
+import { notifyToLine } from "../repositories/postToLineNotify";
 import { MfTable } from "./MfTable";
-import { manimulateBrowser } from "./manimulateBrowser";
+import { manipulateBrowser } from "./manipulateBrowser";
 
 dotenv.config();
 
@@ -32,7 +32,7 @@ dotenv.config();
   let serializedTable;
   try {
     // ブラウザ操作してテーブルを取得する
-    serializedTable = await manimulateBrowser({
+    serializedTable = await manipulateBrowser({
       page,
       env: {
         LOGIN_EMAIL: process.env.LOGIN_EMAIL,

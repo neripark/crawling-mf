@@ -1,5 +1,5 @@
-import { stringToNumber } from "./stringToNumber";
-import { getMessageByDiff } from "./getMessageByDiff";
+import { stringToNumber } from "../utils/stringToNumber";
+import { getMessageByDiff } from "./functions/getMessageByDiff";
 import { JSDOM } from "jsdom";
 
 interface NonNullableRowElements {

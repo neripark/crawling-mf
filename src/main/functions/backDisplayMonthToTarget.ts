@@ -6,7 +6,6 @@ import { generateDateLabelOnMf } from "./generateDateLabel";
  * 指定の数だけ対象の月を遡る関数
  *
  * @param page puppeteerのpageオブジェクト
- * @param numberToBack 何ヶ月遡るか。デフォルト:1
  */
 export const backDisplayMonthToTarget = async (page: Page) => {
   const input = await getGitHubActionsInput("months");

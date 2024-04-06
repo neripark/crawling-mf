@@ -3,7 +3,7 @@ name: Get Input (Test)
 on:
   workflow_dispatch:
     inputs:
-      MONTHS_TO_GO_BACK:
+      MONTHS:
         type: choice
         description: How many months to go back
         options: 

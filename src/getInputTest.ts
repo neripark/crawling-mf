@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 (async () => {
-  const input = await getGitHubActionsInput("MONTHS_TO_GO_BACK");
+  const input = await getGitHubActionsInput("MONTHS");
   console.log("got input:", input);
   console.log("done.");
 })();

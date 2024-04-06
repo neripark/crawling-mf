@@ -33,4 +33,12 @@ describe("generateDateLabelOnMf のテスト", () => {
       expect(generateDateLabelOnMf(3)).toBe("2024/02/01 - 2024/02/29");
     });
   });
+  describe("遡る月数が範囲外の場合", () => {
+    test("4の場合、例外を投げる", () => {
+      expect(() => generateDateLabelOnMf(4)).toThrow();
+    });
+    test("0の場合、例外を投げる", () => {
+      expect(() => generateDateLabelOnMf(0)).toThrow();
+    });
+  });
 });

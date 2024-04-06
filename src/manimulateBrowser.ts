@@ -32,7 +32,8 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   // note: ローカル（というか日本語ページ）でしか現れないページのため分ける
   if (process.env.NODE_ENV !== "production") {
     console.log("[start] skip recommendation biometrics page...");
-    const SELECTOR_SUBMIT_PASSKEY_REJECT = "a[ping$='passkey_rejected']";
+    const SELECTOR_SUBMIT_PASSKEY_REJECT =
+      "a[href^='/passkey_promotion/finalize_passkey_setup']";
     await page.waitForSelector(SELECTOR_SUBMIT_PASSKEY_REJECT);
     await page.click(SELECTOR_SUBMIT_PASSKEY_REJECT);
   }

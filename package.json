@@ -8,7 +8,7 @@
     "format-check": "prettier --check **/*.ts *.md --ignore-path .gitignore",
     "main": "ts-node src/index.ts",
     "main:prd": "NODE_ENV=production ts-node src/index.ts",
-    "get-id-test": "ts-node src/getInputTest.ts",
+    "get-input-test": "ts-node src/getInputTest.ts",
     "type-check": "tsc --noEmit",
     "test": "jest"
   },

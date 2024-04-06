@@ -1,5 +1,6 @@
 import type { Page } from "puppeteer";
 import { generateDateLabelOnMf } from "./generateDateLabel";
+import { getGitHubActionsInput } from "./utils/getGitHubActionsInput";
 
 interface Props {
   page: Page;
@@ -40,7 +41,9 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
 
   // 10. 表示月を遡る
   console.log("[start] change view to target month...");
-  await backMonths(page, 2);
+  // todo: `months` をもう少し具体的な名前に改善する
+  const numberToBackMonths = await getNumberToBackMonths();
+  await backMonths(page, numberToBackMonths);
 
   // 12. 特定のtable要素が表示されるのを待つ
   console.log("[start] wait for display target table...");
@@ -56,6 +59,14 @@ export const manimulateBrowser = async ({ page, env }: Props) => {
   }, SELECTOR_TABLE);
 
   return serializedTable;
+};
+
+const getNumberToBackMonths = async (): Promise<number> => {
+  const input = await getGitHubActionsInput("months");
+  if (isNaN(Number(input))) {
+    throw new Error("数字ではない数が入力されました。");
+  }
+  return Number(input);
 };
 
 /**

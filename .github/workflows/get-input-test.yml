@@ -23,5 +23,7 @@ jobs:
           node-version: '18.15.0'
       - name: Install Dependencies
         run: npm ci
+      - name: Echo env
+        run: env
       - name: Run Logger
         run: npm run get-input-test

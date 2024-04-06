@@ -5,6 +5,15 @@ on:
     # 毎月1日の19時
     - cron: '0 10 1 * *'
   workflow_dispatch:
+    inputs:
+      months:
+        type: choice
+        description: How many months to go back
+        options: 
+        - 1
+        - 2
+        - 3
+        default: 1
 
 jobs:
   crawl:
@@ -19,6 +28,15 @@ jobs:
         run: npm ci
       - name: Run Crawler
         run: npm run main:prd
+        # Note:
+        # inputs: で注入した値は `INPUT_` という接頭辞がついて環境変数にセットされるとのことだったが、 されない場合がある。
+        # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#example-specifying-inputs
+        # > If the action is written using a composite, then it will not automatically get INPUT_<VARIABLE_NAME>. If the conversion doesn't occur, you can change these inputs manually.
+        # そのためこちらで紹介されているように明示的にセットするワークアラウンドが必要。
+        # https://github.com/actions/runner/issues/665#issuecomment-1886156288
+        # todo: なぜこのactionが `composite action` として扱われているのかを理解する。
+        env:
+          INPUT_MONTHS: ${{ github.event.inputs.months }}
         # note: GitHub Actions 上でスクリーンショットを取る際にコメントアウト
         # continue-on-error: true
         env:

@@ -28,7 +28,7 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "jsdom": "^22.1.0",
-    "puppeteer": "^21.5.2",
+    "puppeteer": "^22.6.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },

@@ -1,4 +1,5 @@
 import { stringToNumber } from "../utils/stringToNumber";
+import { isDebugMode } from "../utils/isDebugMode";
 import { notifyToLine } from "../repositories/postToLineNotify";
 import { getMessageByDiff } from "./functions/getMessageByDiff";
 import { JSDOM } from "jsdom";
@@ -33,9 +34,11 @@ export class MfTable {
     const _table = new JSDOM(table);
 
     // ************************************************************************************
-    const tableElement =
-      _table.window.document.querySelector("table")?.innerHTML;
-    notifyToLine("[DEBUG] tableElement: " + tableElement ?? "文字列なし");
+    if (isDebugMode()) {
+      const tableElement =
+        _table.window.document.querySelector("table")?.innerHTML;
+      notifyToLine("[DEBUG] tableElement: " + tableElement ?? "文字列なし");
+    }
     // ************************************************************************************
 
     const rows = _table.window.document.querySelectorAll(
@@ -43,9 +46,13 @@ export class MfTable {
     );
 
     // ************************************************************************************
-    Array.from(rows).map(async (element) => {
-      await notifyToLine("[DEBUG] rows: " + element ?? "文字列なし");
-    });
+    if (isDebugMode()) {
+      Array.from(rows).map(async (element) => {
+        await notifyToLine(
+          "[DEBUG] rows: " + element.innerHTML ?? "文字列なし",
+        );
+      });
+    }
     // ************************************************************************************
 
     if (rows.length === 0) throw new Error("テーブル内の行数が0です。");

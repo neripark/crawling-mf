@@ -28,8 +28,6 @@ jobs:
         run: npm ci
       - name: Run Crawler
         run: npm run main:prd
-        # note: GitHub Actions 上でスクリーンショットを取る際にコメントアウト
-        # continue-on-error: true
         env:
           LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
@@ -42,10 +40,3 @@ jobs:
           # https://github.com/actions/runner/issues/665#issuecomment-1886156288
           # todo: なぜこのactionが `composite action` として扱われているのかを理解する。
           INPUT_MONTHS: ${{ github.event.inputs.months }}
-      # note: GitHub Actions 上でスクリーンショットを取る際にコメントアウト
-      # - name: Download screenshot
-      #   uses: actions/upload-artifact@v3
-      #   if: always()
-      #   with:
-      #     name: screenshot
-      #     path: tmp/

@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import { notifyToLine } from "../repositories/postToLineNotify";
 import { MfTable } from "./MfTable";
 import { manipulateBrowser } from "./manipulateBrowser";
+import { isDebugMode } from "../utils/isDebugMode";
+import { ss } from "../utils/getScreenshot";
 
 dotenv.config();
 
@@ -24,6 +26,9 @@ const main = async () => {
     process.env.NODE_ENV === "production" ? 300000 : page.getDefaultTimeout(),
   );
 
+  // for debug
+  await page.setViewport({width: 1080, height: 1024});
+
   // note: ユーザーエージェント偽装しないとサーバーに弾かれる
   await page.setUserAgent(
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
@@ -43,6 +48,11 @@ const main = async () => {
     const msg = `Failed crawling: ${error}`;
     await notifyToLine(msg);
     throw new Error(msg);
+  }
+
+  // note: テーブル行数が0のエラーのデバッグ
+  if (isDebugMode()) {
+    await ss(page);
   }
 
   // Puppeteer の終了

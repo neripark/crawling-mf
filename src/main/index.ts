@@ -6,7 +6,7 @@ import { manipulateBrowser } from "./manipulateBrowser";
 
 dotenv.config();
 
-(async () => {
+const main = async () => {
   if (
     !process.env.LOGIN_EMAIL ||
     !process.env.LOGIN_PASSWORD ||
@@ -40,7 +40,7 @@ dotenv.config();
       },
     });
   } catch (error) {
-    const msg = `エラーで結果が取得できませんでした。: ${error}`;
+    const msg = `Failed crawling: ${error}`;
     await notifyToLine(msg);
     throw new Error(msg);
   }
@@ -57,4 +57,14 @@ dotenv.config();
 
   console.log("----------------------------------");
   console.log("done.");
+};
+
+(async () => {
+  try {
+    await main();
+  } catch (error) {
+    const msg = `エラー: ${error}`;
+    await notifyToLine(msg);
+    throw new Error(msg);
+  }
 })();

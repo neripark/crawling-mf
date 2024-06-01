@@ -30,13 +30,14 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
 
   // 8. 生体認証を勧められるので`あとで登録`をクリックする
   // note: ローカル（というか日本語ページ）でしか現れないページのため分ける
-  if (process.env.NODE_ENV !== "production") {
-    console.log("[start] skip recommendation biometrics page...");
-    const SELECTOR_SUBMIT_PASSKEY_REJECT =
-      "a[href^='/passkey_promotion/finalize_passkey_setup']";
-    await page.waitForSelector(SELECTOR_SUBMIT_PASSKEY_REJECT);
-    await page.click(SELECTOR_SUBMIT_PASSKEY_REJECT);
-  }
+  // note: ローカルでページがないようなのでコメントアウト
+  // if (process.env.NODE_ENV !== "production") {
+  //   console.log("[start] skip recommendation biometrics page...");
+  //   const SELECTOR_SUBMIT_PASSKEY_REJECT =
+  //     "a[href^='/passkey_promotion/finalize_passkey_setup']";
+  //   await page.waitForSelector(SELECTOR_SUBMIT_PASSKEY_REJECT);
+  //   await page.click(SELECTOR_SUBMIT_PASSKEY_REJECT);
+  // }
 
   // 10. 表示月を遡る
   console.log("[start] change view to target month...");

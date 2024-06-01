@@ -33,9 +33,8 @@ export class MfTable {
     const _table = new JSDOM(table);
 
     // ************************************************************************************
-    const tableElement = _table.window.document.querySelector(
-      "table",
-    )?.innerHTML;
+    const tableElement =
+      _table.window.document.querySelector("table")?.innerHTML;
     notifyToLine("[DEBUG] tableElement: " + tableElement ?? "文字列なし");
     // ************************************************************************************
 
@@ -44,7 +43,7 @@ export class MfTable {
     );
 
     // ************************************************************************************
-    Array.from(rows).map(async element => {
+    Array.from(rows).map(async (element) => {
       await notifyToLine("[DEBUG] rows: " + element ?? "文字列なし");
     });
     // ************************************************************************************

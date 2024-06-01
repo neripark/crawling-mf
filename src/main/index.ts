@@ -27,7 +27,7 @@ const main = async () => {
   );
 
   // for debug
-  await page.setViewport({width: 1080, height: 1024});
+  await page.setViewport({ width: 1080, height: 1024 });
 
   // note: ユーザーエージェント偽装しないとサーバーに弾かれる
   await page.setUserAgent(

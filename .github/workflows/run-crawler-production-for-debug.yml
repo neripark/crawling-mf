@@ -1,6 +1,11 @@
 name: Run Crawler (debug production)
 
 on:
+  # Note:
+  # テーブル行数0のエラーは手動実行だと再現しないため、一時的に自動で実行する。
+  schedule:
+    # 21時
+    - cron: '0 12 1 * *'
   workflow_dispatch:
     inputs:
       months:

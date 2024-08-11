@@ -18,7 +18,7 @@ const main = async () => {
   }
 
   const browser = await puppeteer.launch({
-    headless: process.env.NODE_ENV === "production" ? "new" : false,
+    headless: process.env.NODE_ENV === "production" ? true : false,
   });
   const page = await browser.newPage();
   page.setDefaultTimeout(

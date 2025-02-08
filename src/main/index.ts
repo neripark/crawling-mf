@@ -29,7 +29,7 @@ const main = async () => {
 
   // note: GitHub Actions 上でだけ言語設定が英語になるため、明示的に日本語にする
   await page.setExtraHTTPHeaders({
-    'Accept-Language': 'ja-JP,ja;q=0.9'
+    "Accept-Language": "ja-JP,ja;q=0.9",
   });
 
   // for debug

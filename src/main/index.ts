@@ -27,6 +27,11 @@ const main = async () => {
     process.env.NODE_ENV === "production" ? 300000 : page.getDefaultTimeout(),
   );
 
+  // note: GitHub Actions 上でだけ言語設定が英語になるため、明示的に日本語にする
+  await page.setExtraHTTPHeaders({
+    'Accept-Language': 'ja-JP,ja;q=0.9'
+  });
+
   // for debug
   await page.setViewport({ width: 1080, height: 1024 });
 

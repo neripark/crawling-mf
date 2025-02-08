@@ -2,6 +2,7 @@ import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
 
 export const generateDateLabelOnMf = (numberToBack?: number) => {
   if (numberToBack !== undefined && (numberToBack <= 0 || numberToBack > 3)) {
+    // todo: なぜ3までなのか不明なので、解除する。サイトの仕様では1年遡れるはず
     throw new Error("遡る月数は1以上3以下で指定してください。");
   }
   const now = new Date();

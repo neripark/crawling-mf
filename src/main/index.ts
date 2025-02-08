@@ -19,6 +19,7 @@ const main = async () => {
 
   const browser = await puppeteer.launch({
     headless: process.env.NODE_ENV === "production" ? true : false,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
   page.setDefaultTimeout(

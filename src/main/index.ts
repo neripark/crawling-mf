@@ -35,7 +35,8 @@ const main = async () => {
 
   // note: GitHub Actions 上でだけ言語設定が英語になるため、明示的に日本語にする
   await page.setExtraHTTPHeaders({
-    "Accept-Language": "ja-JP,ja;q=0.9",
+    // 実際にブラウザの優先言語設定を変え、Networkタブで確認した結果を記述
+    "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
   });
 
   // for debug

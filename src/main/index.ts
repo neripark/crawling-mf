@@ -12,7 +12,8 @@ const main = async () => {
   if (
     !process.env.LOGIN_EMAIL ||
     !process.env.LOGIN_PASSWORD ||
-    !process.env.LINE_NOTIFY_TOKEN
+    !process.env.LINE_NOTIFY_TOKEN ||
+    !process.env.LOGIN_TOTP_SECRET
   ) {
     throw new Error("必要な環境変数がありません。");
   }

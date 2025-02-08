@@ -1,6 +1,6 @@
 import type { Page } from "puppeteer";
 import { backDisplayMonthToTarget } from "./functions/backDisplayMonthToTarget";
-import { getTotpPassPhrase } from "./getTotpPassPhrase";
+import { getTotpCode } from "./getTotpCode";
 
 interface Props {
   page: Page;
@@ -31,10 +31,10 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
 
   // 8. TOTPのインプットボックスに6桁の数字を入力して次へ
   console.log("[start] input totp...");
-  const passPhrase = getTotpPassPhrase();
+  const totpCode = getTotpCode();
   const SELECTOR_SUBMIT_BUTTON_TOTP = "button#submitto";
   await page.waitForSelector(SELECTOR_SUBMIT_BUTTON_TOTP);
-  await page.type("input#otp_attempt", passPhrase);
+  await page.type("input#otp_attempt", totpCode);
   await page.click(SELECTOR_SUBMIT_BUTTON_TOTP);
 
   // todo:

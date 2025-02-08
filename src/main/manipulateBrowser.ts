@@ -37,6 +37,9 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
   await page.type("input#otp_attempt", passPhrase);
   await page.click(SELECTOR_SUBMIT_BUTTON_TOTP);
 
+  // todo:
+  // ちょうどパスフレーズが切り替わるタイミングで失敗することがあるので、リトライ機構を入れる
+
   // 8. 生体認証を勧められるので`あとで登録`をクリックする
   // note: ローカル（というか日本語ページ）でしか現れないページのため分ける
   // note: ローカルでページがないようなのでコメントアウト

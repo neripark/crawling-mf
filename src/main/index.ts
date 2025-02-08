@@ -47,13 +47,11 @@ const main = async () => {
     });
   } catch (error) {
     const msg = `Failed crawling: ${error}`;
+    if (isDebugMode()) {
+      await ss(page);
+    }
     await notifyToLine(msg);
     throw new Error(msg);
-  }
-
-  // note: テーブル行数が0のエラーのデバッグ
-  if (isDebugMode()) {
-    await ss(page);
   }
 
   // Puppeteer の終了

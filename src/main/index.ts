@@ -19,7 +19,13 @@ const main = async () => {
 
   const browser = await puppeteer.launch({
     headless: process.env.NODE_ENV === "production" ? true : false,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: [
+      // note: GitHub Actions 上でLinuxの制限がかかるためsandboxを無効にする
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      // note: GitHub Actions 上で英語になるため、明示的に日本語を指定する
+      "--lang=ja-JP",
+    ],
   });
   const page = await browser.newPage();
   page.setDefaultTimeout(

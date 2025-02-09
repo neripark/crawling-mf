@@ -1,5 +1,5 @@
 import type { Page } from "puppeteer";
-import { backDisplayMonthToTarget } from "./functions/backDisplayMonthToTarget";
+import { backDisplayMonthToTarget } from "./backDisplayMonthToTarget";
 import { getTotpCode } from "./getTotpCode";
 
 interface Props {

@@ -13,9 +13,9 @@ const environmentVariables: Readonly<
  * @throws {Error} 必要な環境変数が存在しない場合
  */
 export const validateEnvironmentVariables = (): void => {
-  Object.values(environmentVariables).forEach((value) => {
+  Object.entries(environmentVariables).forEach(([key, value]) => {
     if (!value) {
-      throw new Error("必要な環境変数がありません。");
+      throw new Error(`必要な環境変数 '${key}' がありません。`);
     }
   });
 };

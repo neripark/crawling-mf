@@ -1,3 +1,5 @@
+import { RequiredEnvironmentVariables } from "../types/env";
+
 const environmentVariables: Readonly<
   Record<keyof RequiredEnvironmentVariables, string>
 > = {

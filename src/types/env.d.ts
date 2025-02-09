@@ -11,7 +11,7 @@ declare module "process" {
  *
  * @remarks .env と同期されている必要がある。
  */
-interface RequiredEnvironmentVariables {
+export interface RequiredEnvironmentVariables {
   readonly LINE_NOTIFY_TOKEN: string;
   readonly LOGIN_EMAIL: string;
   readonly LOGIN_PASSWORD: string;

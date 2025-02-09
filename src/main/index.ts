@@ -5,18 +5,14 @@ import { MfTable } from "./MfTable";
 import { manipulateBrowser } from "./manipulateBrowser";
 import { isDebugMode } from "../utils/isDebugMode";
 import { ss } from "../utils/getScreenshot";
+import { validateEnvironmentVariables, getEnv } from "../utils/env";
 
 dotenv.config();
 
 const main = async () => {
-  if (
-    !process.env.LOGIN_EMAIL ||
-    !process.env.LOGIN_PASSWORD ||
-    !process.env.LINE_NOTIFY_TOKEN ||
-    !process.env.LOGIN_TOTP_SECRET
-  ) {
-    throw new Error("必要な環境変数がありません。");
-  }
+  validateEnvironmentVariables();
+
+  process.env.LOGIN_EMAIL;
 
   const browser = await puppeteer.launch({
     headless: process.env.NODE_ENV === "production" ? true : false,
@@ -54,8 +50,8 @@ const main = async () => {
     serializedTable = await manipulateBrowser({
       page,
       env: {
-        LOGIN_EMAIL: process.env.LOGIN_EMAIL,
-        LOGIN_PASSWORD: process.env.LOGIN_PASSWORD,
+        LOGIN_EMAIL: getEnv("LOGIN_EMAIL"),
+        LOGIN_PASSWORD: getEnv("LOGIN_PASSWORD"),
       },
     });
   } catch (error) {

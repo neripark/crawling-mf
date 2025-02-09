@@ -1,5 +1,5 @@
 import type { Page } from "puppeteer";
-import { getGitHubActionsInput } from "../../repositories/getGitHubActionsInput";
+import { getGitHubActionsInput } from "../../../repositories/getGitHubActionsInput";
 import { generateDateLabelOnMf } from "./generateDateLabel";
 
 /**

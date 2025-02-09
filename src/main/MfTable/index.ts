@@ -1,7 +1,7 @@
-import { stringToNumber } from "../utils/stringToNumber";
-import { isDebugMode } from "../utils/isDebugMode";
-import { notifyToLine } from "../repositories/postToLineNotify";
-import { getMessageByDiff } from "./functions/getMessageByDiff";
+import { stringToNumber } from "../../utils/stringToNumber";
+import { isDebugMode } from "../../utils/isDebugMode";
+import { notifyToLine } from "../../repositories/postToLineNotify";
+import { getMessageByDiff } from "./getMessageByDiff";
 import { JSDOM } from "jsdom";
 
 interface NonNullableRowElements {

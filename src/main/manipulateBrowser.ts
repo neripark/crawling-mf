@@ -1,5 +1,6 @@
 import type { Page } from "puppeteer";
 import { backDisplayMonthToTarget } from "./functions/backDisplayMonthToTarget";
+import { getTotpCode } from "./getTotpCode";
 
 interface Props {
   page: Page;
@@ -27,6 +28,17 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
   await page.waitForSelector(SELECTOR_SUBMIT_BUTTON_PASSWORD);
   await page.type("input[type='password']", env.LOGIN_PASSWORD);
   await page.click(SELECTOR_SUBMIT_BUTTON_PASSWORD);
+
+  // 8. TOTPのインプットボックスに6桁の数字を入力して次へ
+  console.log("[start] input totp...");
+  const totpCode = getTotpCode();
+  const SELECTOR_SUBMIT_BUTTON_TOTP = "button#submitto";
+  await page.waitForSelector(SELECTOR_SUBMIT_BUTTON_TOTP);
+  await page.type("input#otp_attempt", totpCode);
+  await page.click(SELECTOR_SUBMIT_BUTTON_TOTP);
+
+  // todo:
+  // ちょうどパスフレーズが切り替わるタイミングで失敗することがあるので、リトライ機構を入れる
 
   // 8. 生体認証を勧められるので`あとで登録`をクリックする
   // note: ローカル（というか日本語ページ）でしか現れないページのため分ける

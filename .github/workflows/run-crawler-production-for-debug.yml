@@ -34,6 +34,7 @@ jobs:
         env:
           LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+          LOGIN_TOTP_SECRET: ${{ secrets.LOGIN_TOTP_SECRET }}
           # テスト用のLINEトークン
           LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN_DEBUG }}
           INPUT_MONTHS: ${{ github.event.inputs.months }}

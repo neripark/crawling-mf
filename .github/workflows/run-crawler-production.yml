@@ -32,6 +32,7 @@ jobs:
           LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
+          LOGIN_TOTP_SECRET: ${{ secrets.LOGIN_TOTP_SECRET }}
           # Note:
           # inputs: で注入した値は `INPUT_` という接頭辞がついて環境変数にセットされるとのことだったが、 されない場合がある。
           # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#example-specifying-inputs

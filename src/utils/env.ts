@@ -26,6 +26,5 @@ export const validateEnvironmentVariables = (): void => {
  * @param key 取得したい環境変数のキー。
  * @returns 環境変数の値。
  */
-export const getEnv = (key: keyof RequiredEnvironmentVariables) => {
-  return environmentVariables[key];
-};
+export const getEnv = (key: keyof RequiredEnvironmentVariables) =>
+  environmentVariables[key];

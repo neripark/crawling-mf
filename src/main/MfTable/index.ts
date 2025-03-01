@@ -37,7 +37,7 @@ export class MfTable {
     if (isDebugMode()) {
       const tableElement =
         _table.window.document.querySelector("table")?.innerHTML;
-      notifyToLine("[DEBUG] tableElement: " + tableElement ?? "文字列なし");
+      notifyToLine(`[DEBUG] tableElement: ${tableElement ?? "文字列なし"}`);
     }
     // ************************************************************************************
 
@@ -49,7 +49,7 @@ export class MfTable {
     if (isDebugMode()) {
       Array.from(rows).map(async (element) => {
         await notifyToLine(
-          "[DEBUG] rows: " + element.innerHTML ?? "文字列なし",
+          `[DEBUG] rows: ${element.innerHTML ?? "文字列なし"}`,
         );
       });
     }

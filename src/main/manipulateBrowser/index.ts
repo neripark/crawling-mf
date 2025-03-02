@@ -53,7 +53,6 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
 
   // 10. 表示月を遡る
   console.log("[start] change view to target month...");
-  // todo: `months` をもう少し具体的な名前に改善する
   await backDisplayMonthToTarget(page);
 
   // 12. 特定のtable要素が表示されるのを待つ

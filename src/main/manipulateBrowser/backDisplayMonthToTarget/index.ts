@@ -1,15 +1,12 @@
 import type { Page } from "puppeteer";
 import { generateDateLabelOnMf } from "./generateDateLabel";
-import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 
 /**
  * 指定の数だけ対象の月を遡る関数
  *
  * @param page puppeteerのpageオブジェクト
  */
-export const backDisplayMonthToTarget = async (page: Page) => {
-  const numberToBack = await getNumberGoingBackMonths();
-
+export const backDisplayMonthToTarget = async ({page, numberToBack}: {page: Page; numberToBack: number}) => {
   for (let i = 1; i <= numberToBack; i++) {
     // 10. 1ヶ月前に戻る
     await backToLastMonth(page);

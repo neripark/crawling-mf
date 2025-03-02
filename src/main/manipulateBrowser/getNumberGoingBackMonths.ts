@@ -1,4 +1,4 @@
-import { getGitHubActionsInput } from "../../../repositories/getGitHubActionsInput";
+import { getGitHubActionsInput } from "../../repositories/getGitHubActionsInput";
 
 const DEFAULT_BACK_MONTHS = 1;
 

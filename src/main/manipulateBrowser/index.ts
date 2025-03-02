@@ -1,5 +1,7 @@
 import type { Page } from "puppeteer";
+import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 import { backDisplayMonthToTarget } from "./backDisplayMonthToTarget";
+import { generateTargetMonthLabel } from "./generateTargetMonthLabel";
 import { getTotpCode } from "./getTotpCode";
 
 interface Props {
@@ -53,8 +55,8 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
 
   // 10. 表示月を遡る
   console.log("[start] change view to target month...");
-  // todo: `months` をもう少し具体的な名前に改善する
-  await backDisplayMonthToTarget(page);
+  const numberToBack = await getNumberGoingBackMonths();
+  await backDisplayMonthToTarget({ page, numberToBack });
 
   // 12. 特定のtable要素が表示されるのを待つ
   console.log("[start] wait for display target table...");
@@ -69,5 +71,7 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
     return table.outerHTML;
   }, SELECTOR_TABLE);
 
-  return serializedTable;
+  const targetMonth = generateTargetMonthLabel(numberToBack);
+
+  return { serializedTable, targetMonth };
 };

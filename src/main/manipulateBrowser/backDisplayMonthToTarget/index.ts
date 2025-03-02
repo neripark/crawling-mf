@@ -1,6 +1,6 @@
 import type { Page } from "puppeteer";
-import { getGitHubActionsInput } from "../../../repositories/getGitHubActionsInput";
 import { generateDateLabelOnMf } from "./generateDateLabel";
+import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 
 /**
  * 指定の数だけ対象の月を遡る関数
@@ -8,12 +8,7 @@ import { generateDateLabelOnMf } from "./generateDateLabel";
  * @param page puppeteerのpageオブジェクト
  */
 export const backDisplayMonthToTarget = async (page: Page) => {
-  const input = await getGitHubActionsInput("months");
-  if (isNaN(Number(input))) {
-    throw new Error("数字ではない数が入力されました。");
-  }
-
-  const numberToBack = Number(input);
+  const numberToBack = await getNumberGoingBackMonths();
 
   for (let i = 1; i <= numberToBack; i++) {
     // 10. 1ヶ月前に戻る

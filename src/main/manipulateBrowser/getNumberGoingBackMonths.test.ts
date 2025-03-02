@@ -1,7 +1,7 @@
 import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
-import { getGitHubActionsInput } from "../../../repositories/getGitHubActionsInput";
+import { getGitHubActionsInput } from "../../repositories/getGitHubActionsInput";
 
-jest.mock("../../../repositories/getGitHubActionsInput");
+jest.mock("../../repositories/getGitHubActionsInput");
 
 describe("getNumberGoingBackMonths", () => {
   test("GitHub Actionsから正の数が取得された場合、そのまま返すこと", async () => {

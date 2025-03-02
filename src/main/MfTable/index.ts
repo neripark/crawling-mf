@@ -138,6 +138,6 @@ export class MfTable {
     });
     const msgList = emojiRows.length !== 0 ? emojiRows.join("\n") : "なし";
     const msgSummary = this.calcDiff();
-    return `${this.targetMonth}の結果です。\n\nおさいふから出した会計の一覧:\n${msgList}\n\n計算結果:\n${msgSummary}`;
+    return `\n${this.targetMonth}の結果です。\n\nおさいふから出した会計の一覧:\n${msgList}\n\n計算結果:\n${msgSummary}`;
   }
 }

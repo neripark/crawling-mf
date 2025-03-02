@@ -6,7 +6,13 @@ import { generateDateLabelOnMf } from "./generateDateLabel";
  *
  * @param page puppeteerのpageオブジェクト
  */
-export const backDisplayMonthToTarget = async ({page, numberToBack}: {page: Page; numberToBack: number}) => {
+export const backDisplayMonthToTarget = async ({
+  page,
+  numberToBack,
+}: {
+  page: Page;
+  numberToBack: number;
+}) => {
   for (let i = 1; i <= numberToBack; i++) {
     // 10. 1ヶ月前に戻る
     await backToLastMonth(page);

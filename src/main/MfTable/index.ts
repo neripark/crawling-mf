@@ -31,7 +31,13 @@ export class MfTable {
   private EMOJI_2 = "💸";
 
   // note: 文字列でシリアライズされたTableを受け取る想定
-  constructor({ serializedTable, targetMonth }: { serializedTable: string; targetMonth: string }) {
+  constructor({
+    serializedTable,
+    targetMonth,
+  }: {
+    serializedTable: string;
+    targetMonth: string;
+  }) {
     this.rowElements = this.validate(serializedTable);
     this.targetMonth = targetMonth;
     this.rows = this.exchange();

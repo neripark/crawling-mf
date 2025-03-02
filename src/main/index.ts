@@ -48,10 +48,13 @@ const main = async () => {
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
   );
 
-  let serializedTable;
+  let crawlResult: {
+    serializedTable: string;
+    targetMonth: string;
+  };
   try {
     // ブラウザ操作してテーブルを取得する
-    serializedTable = await manipulateBrowser({
+    crawlResult = await manipulateBrowser({
       page,
       env: {
         LOGIN_EMAIL: process.env.LOGIN_EMAIL,
@@ -71,7 +74,7 @@ const main = async () => {
   await browser.close();
 
   console.log("[start] serialize target table and format message...");
-  const mfTable = new MfTable(serializedTable);
+  const mfTable = new MfTable(crawlResult);
   const msg = mfTable.getMessage();
 
   // todo: 長いと見切れるため、分割送信するかどうか決める

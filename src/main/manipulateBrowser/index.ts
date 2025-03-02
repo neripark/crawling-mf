@@ -69,5 +69,7 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
     return table.outerHTML;
   }, SELECTOR_TABLE);
 
-  return serializedTable;
+  const targetMonth = "hoge month";
+
+  return { serializedTable, targetMonth };
 };

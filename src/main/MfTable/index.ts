@@ -17,16 +17,23 @@ interface Row {
   number: number;
 }
 
-// ______________________________
+/**
+ * @todo 責務が巨大なので分割する。
+ * - テーブルのバリデーション、計算
+ * - テーブルの集計とは関係ない`targetMonth`を扱っている
+ * - メッセージの作成
+ */
 export class MfTable {
   private rowElements: NonNullableRowElements[];
   private rows: Row[];
+  private targetMonth: string | undefined;
   private EMOJI_1 = "💰";
   private EMOJI_2 = "💸";
 
   // note: 文字列でシリアライズされたTableを受け取る想定
-  constructor(table: string) {
-    this.rowElements = this.validate(table);
+  constructor({ serializedTable, targetMonth }: { serializedTable: string; targetMonth: string }) {
+    this.rowElements = this.validate(serializedTable);
+    this.targetMonth = targetMonth;
     this.rows = this.exchange();
   }
 
@@ -131,6 +138,6 @@ export class MfTable {
     });
     const msgList = emojiRows.length !== 0 ? emojiRows.join("\n") : "なし";
     const msgSummary = this.calcDiff();
-    return `\nおさいふから出した会計の一覧:\n${msgList}\n\n計算結果:\n${msgSummary}`;
+    return `${this.targetMonth}の結果です。\n\nおさいふから出した会計の一覧:\n${msgList}\n\n計算結果:\n${msgSummary}`;
   }
 }

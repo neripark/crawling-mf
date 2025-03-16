@@ -1,7 +1,8 @@
 import { messagingApi } from "@line/bot-sdk";
 
 export const notifyToLine = async (message: string) => {
-  const channelAccessToken = process.env.LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN;
+  const channelAccessToken =
+    process.env.LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN;
   const groupId = process.env.LINE_GROUP_ID;
 
   // todo: 型定義で undefined を排除する
@@ -22,9 +23,9 @@ export const notifyToLine = async (message: string) => {
     messages: [
       // todo: いい感じの見た目にする
       {
-        "type": "text",
-        "text": message,
+        type: "text",
+        text: message,
       },
-    ]
+    ],
   });
 };

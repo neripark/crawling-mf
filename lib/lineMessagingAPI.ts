@@ -49,13 +49,14 @@ const createPushMessageClient = (client: Client) => {
     throw new Error("LINE_GROUP_ID is not set");
   }
 
-  return async (args: H, rest?: PushMessageArgsRest) => client.pushMessage(
-    {
-      to: groupId,
-      messages: args.messages,
-    },
-    ...(rest ?? []),
-  );
+  return async (args: H, rest?: PushMessageArgsRest) =>
+    client.pushMessage(
+      {
+        to: groupId,
+        messages: args.messages,
+      },
+      ...(rest ?? []),
+    );
 };
 
 export const pushMessageClient = createPushMessageClient(initialize());

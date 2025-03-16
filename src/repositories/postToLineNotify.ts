@@ -14,7 +14,6 @@ export const notifyToLine = async (message: string) => {
   }
 
   const config = { channelAccessToken };
-  console.log("config", config);
 
   const client = new messagingApi.MessagingApiClient(config);
 

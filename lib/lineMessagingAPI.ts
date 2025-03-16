@@ -1,3 +1,7 @@
+/**
+ * @file LINE Messaging API のクライアント関数を生成する。
+ * @todo クライアント関数の初期化と pushMessageClient の生成でファイルを分割する
+ */
 import { messagingApi } from "@line/bot-sdk";
 import dotenv from "dotenv";
 
@@ -14,34 +18,44 @@ const initialize = () => {
   }
   const channelAccessToken =
     process.env.LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN;
-  const groupId = process.env.LINE_GROUP_ID;
 
   // todo: 型定義で undefined を排除する
   if (!channelAccessToken) {
     throw new Error("LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN is not set");
   }
+
+  const config = { channelAccessToken };
+  const nativeClient: Client = new messagingApi.MessagingApiClient(config);
+
+  return nativeClient;
+};
+
+// _______________________________________________________________
+
+type PushMessage = Client["pushMessage"];
+type PushMessageArgs = Parameters<PushMessage>;
+
+type First<T extends any[]> = T extends [infer F, ...any[]] ? F : never;
+type Rest<T extends any[]> = T extends [any, ...infer R] ? R : never;
+
+type PushMessageArgs0 = First<PushMessageArgs>;
+type PushMessageArgsRest = Rest<PushMessageArgs>;
+
+type H = Omit<PushMessageArgs0, "to">;
+
+const createPushMessageClient = (client: Client) => {
+  const groupId = process.env.LINE_GROUP_ID;
   if (!groupId) {
     throw new Error("LINE_GROUP_ID is not set");
   }
 
-  const config = { channelAccessToken };
-  const nativeClient: Client = new messagingApi.MessagingApiClient(config);
-  const client = createPushMessageClient(groupId, nativeClient);
-
-  return client;
-};
-
-const createPushMessageClient = (groupId: string, client: Client) => {
-  return async (message: string) =>
-    client.pushMessage({
+  return async (args: H, rest?: PushMessageArgsRest) => client.pushMessage(
+    {
       to: groupId,
-      messages: [
-        {
-          type: "text",
-          text: message,
-        },
-      ],
-    });
+      messages: args.messages,
+    },
+    ...(rest ?? []),
+  );
 };
 
-export const pushMessage = initialize();
+export const pushMessageClient = createPushMessageClient(initialize());

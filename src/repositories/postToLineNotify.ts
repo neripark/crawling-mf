@@ -1,4 +1,10 @@
-// import { messagingApi } from "@line/bot-sdk";
-import { pushMessage } from "../../lib/lineMessagingAPI";
+import { pushMessageClient } from "../../lib/lineMessagingAPI";
 
-export const notifyToLine = async (message: string) => pushMessage(message);
+export const notifyToLine = async (message: string) => pushMessageClient({
+  messages: [
+    {
+      type: "text",
+      text: message,
+    },
+  ]
+});

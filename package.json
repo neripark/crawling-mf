@@ -25,6 +25,7 @@
   "homepage": "https://github.com/neripark/crawling-mf#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
+    "@line/bot-sdk": "^9.7.1",
     "@types/jsdom": "^21.1.7",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",

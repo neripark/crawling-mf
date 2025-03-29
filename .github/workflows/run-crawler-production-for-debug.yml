@@ -34,9 +34,10 @@ jobs:
           LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           LOGIN_TOTP_SECRET: ${{ secrets.LOGIN_TOTP_SECRET }}
-          # テスト用のLINEトークン
-          LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN_DEBUG }}
           INPUT_MONTHS: ${{ github.event.inputs.months }}
+          LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN }}
+          # テスト用のLINEグループID
+          LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID_DEBUG }}
       # note: GitHub Actions 上でスクリーンショットを取るための設定
       - name: Download screenshot
         uses: actions/upload-artifact@v4

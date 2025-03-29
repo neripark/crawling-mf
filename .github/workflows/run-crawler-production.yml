@@ -30,7 +30,8 @@ jobs:
         env:
           LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-          LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
+          LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN }}
+          LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID }}
           LOGIN_TOTP_SECRET: ${{ secrets.LOGIN_TOTP_SECRET }}
           # Note:
           # inputs: で注入した値は `INPUT_` という接頭辞がついて環境変数にセットされるとのことだったが、 されない場合がある。

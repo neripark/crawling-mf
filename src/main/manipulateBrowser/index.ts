@@ -1,7 +1,7 @@
 import type { Page } from "puppeteer";
-import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 import { backDisplayMonthToTarget } from "./backDisplayMonthToTarget";
 import { generateTargetMonthLabel } from "./generateTargetMonthLabel";
+import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 import { getTotpCode } from "./getTotpCode";
 
 interface Props {

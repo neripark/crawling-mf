@@ -1,4 +1,4 @@
-import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
+import { endOfMonth, format, startOfMonth, subMonths } from "date-fns";
 
 export const generateDateLabelOnMf = (numberToBack?: number) => {
   if (numberToBack !== undefined && (numberToBack <= 0 || numberToBack > 3)) {

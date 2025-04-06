@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import { notifyToLine } from "../repositories/postToLineNotify";
-import { MfTable } from "./MfTable";
-import { manipulateBrowser } from "./manipulateBrowser";
-import { isDebugMode } from "../utils/isDebugMode";
 import { ss } from "../utils/getScreenshot";
+import { isDebugMode } from "../utils/isDebugMode";
+import { MfTable } from "./MfTable";
 import { initializeBrowser } from "./initializeBrowser";
+import { manipulateBrowser } from "./manipulateBrowser";
 
 dotenv.config();
 

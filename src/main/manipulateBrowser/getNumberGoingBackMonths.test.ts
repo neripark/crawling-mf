@@ -1,5 +1,5 @@
-import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 import { getGitHubActionsInput } from "../../repositories/getGitHubActionsInput";
+import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 
 jest.mock("../../repositories/getGitHubActionsInput");
 

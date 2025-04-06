@@ -1,8 +1,8 @@
-import { stringToNumber } from "../../utils/stringToNumber";
-import { isDebugMode } from "../../utils/isDebugMode";
-import { notifyToLine } from "../../repositories/postToLineNotify";
-import { getMessageByDiff } from "./getMessageByDiff";
 import { JSDOM } from "jsdom";
+import { notifyToLine } from "../../repositories/postToLineNotify";
+import { isDebugMode } from "../../utils/isDebugMode";
+import { stringToNumber } from "../../utils/stringToNumber";
+import { getMessageByDiff } from "./getMessageByDiff";
 
 interface NonNullableRowElements {
   date: Element;

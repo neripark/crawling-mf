@@ -1,4 +1,4 @@
-name: Test (jest)
+name: Test
 
 on:
   pull_request:
@@ -6,14 +6,14 @@ on:
       - main
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 18.12.1
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.15.0'
+          node-version: '22.6.0'
       - run: node -v && npm -v
       - run: npm ci
       - run: npm run test

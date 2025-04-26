@@ -15,7 +15,7 @@ const testPattern = [
     label: "2025年4月1日11時15分30.156秒",
     mockDate: new Date(2025, 3, 1, 11, 15, 30, 156),
     expected: "2025_04_01-11_15_30_156",
-  }
+  },
 ];
 
 describe("getTimestamp", () => {
@@ -26,11 +26,14 @@ describe("getTimestamp", () => {
     jest.useRealTimers();
   });
 
-  it.each(testPattern)("現在の日付が$labelの場合、`$expected`が出力されること", ({mockDate, expected}) => {
-    jest.setSystemTime(mockDate);
+  it.each(testPattern)(
+    "現在の日付が$labelの場合、`$expected`が出力されること",
+    ({ mockDate, expected }) => {
+      jest.setSystemTime(mockDate);
 
-    const result = getTimestamp();
+      const result = getTimestamp();
 
-    expect(result).toBe(expected);
-  });
+      expect(result).toBe(expected);
+    },
+  );
 });

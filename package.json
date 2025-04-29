@@ -30,7 +30,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "jsdom": "^26.1.0",
-    "puppeteer": "^24.4.0",
+    "puppeteer": "^24.7.2",
     "totp-generator": "^1.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"

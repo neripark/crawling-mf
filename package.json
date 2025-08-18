@@ -33,7 +33,7 @@
     "puppeteer": "^24.10.1",
     "totp-generator": "^1.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

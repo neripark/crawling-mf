@@ -95,10 +95,9 @@ export class MfTable {
             element.date.attributes.getNamedItem("data-table-sortable-value")
               ?.value ?? "",
           content: element.content.textContent?.trim() ?? "",
-          // note: 編集可能項目と不可能項目でセレクタが違うため複数抽出
           number: stringToNumber(
-            element.number.querySelectorAll(".noform > span, span.offset")[0]
-              .textContent ?? "",
+            // note: 編集不可能項目には.offsetがつくが編集可能項目にはつかないため仕方なく要素で取得している
+            element.number.querySelectorAll("span")[0].textContent ?? "",
           ),
         };
       })

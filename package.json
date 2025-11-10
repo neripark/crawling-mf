@@ -31,7 +31,7 @@
     "dotenv": "^17.2.2",
     "jsdom": "^27.0.0",
     "puppeteer": "^24.10.1",
-    "totp-generator": "^1.0.0",
+    "totp-generator": "^2.0.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },

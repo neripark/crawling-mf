@@ -33,7 +33,7 @@ export const manipulateBrowser = async ({ page, env }: Props) => {
 
   // 8. TOTPのインプットボックスに6桁の数字を入力して次へ
   console.log("[start] input totp...");
-  const totpCode = getTotpCode();
+  const totpCode = await getTotpCode();
   const SELECTOR_SUBMIT_BUTTON_TOTP = "button#submitto";
   await page.waitForSelector(SELECTOR_SUBMIT_BUTTON_TOTP);
   await page.type("input#otp_attempt", totpCode);

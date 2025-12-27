@@ -1,6 +1,10 @@
 import { getTimestamp } from "./getTimestamp";
 
-const testPattern = [
+const testPattern: Array<{
+  label: string;
+  mockDate: Date;
+  expected: string;
+}> = [
   {
     // ミリ秒指定あり
     label: "2025年4月1日",
@@ -23,16 +27,16 @@ const testPattern = [
 
 describe("getTimestamp", () => {
   beforeAll(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
   afterAll(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it.each(testPattern)(
     "現在の日付が$labelの場合、`$expected`が出力されること",
     ({ mockDate, expected }) => {
-      jest.setSystemTime(mockDate);
+      vi.setSystemTime(mockDate);
 
       const result = getTimestamp();
 

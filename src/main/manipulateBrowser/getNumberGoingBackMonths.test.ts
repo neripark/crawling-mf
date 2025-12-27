@@ -1,4 +1,3 @@
-import { describe, test, expect, vi } from "vitest";
 import { getGitHubActionsInput } from "../../repositories/getGitHubActionsInput";
 import { getNumberGoingBackMonths } from "./getNumberGoingBackMonths";
 

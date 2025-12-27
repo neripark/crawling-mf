@@ -1,4 +1,3 @@
-import { describe, test, expect, beforeEach, vi } from "vitest";
 import { generateDateLabelOnMf } from "./generateDateLabel";
 
 describe("generateDateLabelOnMf のテスト", () => {

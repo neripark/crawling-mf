@@ -1,4 +1,3 @@
-import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
 import { getTimestamp } from "./getTimestamp";
 
 const testPattern: Array<{

@@ -10,8 +10,7 @@
     "main:prd": "NODE_ENV=production tsx src/main/index.ts",
     "main:debug": "NODE_ENV=production DEBUG=true tsx src/main/index.ts",
     "type-check": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",

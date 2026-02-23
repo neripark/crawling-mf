@@ -39,6 +39,6 @@
     "@types/node": "^24.9.1",
     "prettier": "^3.7.4",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.18"
   }
 }

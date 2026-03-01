@@ -2,6 +2,7 @@
   "name": "crawling-mf",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "format": "prettier --write './**/*.ts' *.md --ignore-path .gitignore",

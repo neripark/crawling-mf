@@ -27,7 +27,7 @@
   "dependencies": {
     "@actions/core": "^3.0.0",
     "@line/bot-sdk": "^10.5.0",
-    "@types/jsdom": "^27.0.0",
+    "@types/jsdom": "^28.0.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
     "jsdom": "^28.1.0",

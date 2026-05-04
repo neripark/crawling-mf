@@ -34,7 +34,7 @@
     "puppeteer": "^24.10.1",
     "totp-generator": "^2.0.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@types/node": "^25.3.3",

@@ -33,7 +33,7 @@
     "jsdom": "^28.1.0",
     "puppeteer": "^25.0.3",
     "totp-generator": "^2.0.1",
-    "tsx": "^4.21.0",
+    "tsx": "^4.23.10",
     "typescript": "^6.0.3"
   },
   "devDependencies": {

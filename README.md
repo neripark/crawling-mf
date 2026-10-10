@@ -7,9 +7,6 @@
 
 # Setup
 
-`.node-version` に指定された Node.js と、それに同梱された npm を使用する。
-`node -v` と `npm -v` で、古い npm が PATH 上で優先されていないことも確認する。
-
 ```
 $ cp .env.example .env # and edit
 $ npm ci

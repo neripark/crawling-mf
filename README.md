@@ -7,10 +7,17 @@
 
 # Setup
 
+`.node-version` に指定された Node.js と、それに同梱された npm を使用する。
+`node -v` と `npm -v` で、古い npm が PATH 上で優先されていないことも確認する。
+
 ```
 $ cp .env.example .env # and edit
 $ npm ci
 ```
+
+依存パッケージのインストールスクリプトは、`package.json` の `allowScripts` でバージョンを固定して許可している。
+esbuild は実行バイナリのセットアップ、Puppeteer はブラウザのダウンロード、fsevents は macOS 向けの依存として登録している。
+依存更新後に未承認スクリプトの Warning が出た場合は、`npm install-scripts ls` で対象と内容を確認し、必要なものを `npm install-scripts approve <パッケージ名>` で更新する。
 
 # デバッグ
 

@@ -15,9 +15,9 @@ $ cp .env.example .env # and edit
 $ npm ci
 ```
 
-依存パッケージのインストールスクリプトは、`package.json` の `allowScripts` でバージョンを固定して許可している。
-esbuild は実行バイナリのセットアップ、Puppeteer はブラウザのダウンロード、fsevents は macOS 向けの依存として登録している。
-依存更新後に未承認スクリプトの Warning が出た場合は、`npm install-scripts ls` で対象と内容を確認し、必要なものを `npm install-scripts approve <パッケージ名>` で更新する。
+依存パッケージのインストールスクリプトは、`package.json` の `allowScripts` でパッケージ名単位で許可している。許可はバージョン更新後も引き継がれる。
+esbuild は実行バイナリのセットアップ、Puppeteer はブラウザのダウンロード、fsevents は tsx / Vite が依存する macOS 向けのファイル変更監視パッケージとして登録している。
+依存更新後に未承認スクリプトの Warning が出た場合は、`npm install-scripts ls` で対象と内容を確認し、必要なものを `npm install-scripts approve --no-allow-scripts-pin <パッケージ名>` で追加する。
 
 # デバッグ
 
